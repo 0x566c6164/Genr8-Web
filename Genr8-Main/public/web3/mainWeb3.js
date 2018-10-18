@@ -13,8 +13,12 @@ var ICOList = [];
 var web3Mode = null;
 var walletMode = 'metamask';
 var currentAddress = null;
+var keystore = null;
+var dividendValue = 0;
+var tokenBalance = 0;
 var contract = null;
 var registry = null;
+var muteSound = false;
 
 var buyPrice = 0;
 var globalBuyPrice = 0;
@@ -30,6 +34,44 @@ var genr8ABI = [{"constant":false,"inputs":[{"name":"_spender","type":"address"}
 
 // ABI of Registry
 var registryABI = [{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"namespace","type":"bytes32"},{"indexed":false,"name":"key","type":"bytes32"},{"indexed":false,"name":"value","type":"address"},{"indexed":false,"name":"setter","type":"address"}],"name":"RegistryEntry","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[{"name":"who","type":"address"},{"name":"status","type":"bool"}],"name":"setAdministrator","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"who","type":"address"},{"name":"status","type":"bool"}],"name":"setWhitelist","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"namespace","type":"bytes32"},{"name":"key","type":"bytes32"},{"name":"value","type":"address"}],"name":"setRegistry","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"namespace","type":"bytes32"},{"name":"key","type":"bytes32"}],"name":"lookUp","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"listNamespaces","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"key","type":"bytes32"}],"name":"listKeys","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"namespace","type":"bytes32"}],"name":"isNamespaceInUse","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]
+
+
+// UTILITY FUNCTIONS
+if (!String.prototype.format) {
+  String.prototype.format = function () {
+    var args = arguments
+    return this.replace(/{(\d+)}/g, function (match, number) {
+      return typeof args[number] !== 'undefined'
+        ? args[number]
+        : match
+
+    })
+  }
+}
+
+
+
+function copyToClipboard (text) {
+  if (window.clipboardData && window.clipboardData.setData) {
+    // IE specific code path to prevent textarea being shown while dialog is visible.
+    return clipboardData.setData('Text', text)
+
+  } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+    var textarea = document.createElement('textarea')
+    textarea.textContent = text
+    textarea.style.position = 'fixed'  // Prevent scrolling to bottom of page in MS Edge.
+    document.body.appendChild(textarea)
+    textarea.select()
+    try {
+      return document.execCommand('copy')  // Security exception may be thrown by some browsers.
+    } catch (ex) {
+      console.warn('Copy to clipboard failed.', ex)
+      return false
+    } finally {
+      document.body.removeChild(textarea)
+    }
+  }
+}
 
 function updateEthPrice () {
   clearTimeout(ethPriceTimer)
@@ -53,7 +95,137 @@ function convertWeiToEth (e) {
   return e / 1e18
 }
 
+function getSeed () {
+  useWallet(function (pwDerivedKey) {
+    console.log(keystore.getSeed(pwDerivedKey))
+  })
+}
+
+function generateWallet () {
+
+  if (keystore !== null) {
+    if (!confirm(lang.walletGenConfirmation))
+      return
+  }
+
+  // generate a new BIP32 12-word seed
+  var secretSeed = lightwallet.keystore.generateRandomSeed()
+
+  // the seed is stored encrypted by a user-defined password
+  var password = prompt(lang.enterPassword)
+
+  lightwallet.keystore.createVault({
+    seedPhrase: secretSeed,
+    password: password,
+    hdPathString: `m/44'/60'/0'/0`,
+  }, function (err, ks) {
+    if (err) throw err
+
+    keystore = ks
+
+    // Store keystore in local storage
+    localStorage.setItem('keystore', keystore.serialize())
+
+    keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+      if (err) throw err
+      keystore.generateNewAddress(pwDerivedKey, 1)
+
+      var address = keystore.getAddresses()[0]
+
+      $('#wallet-seed').html(secretSeed)
+      $('#wallet-address').html(address)
+      $('#seed-dimmer').dimmer('show')
+
+      currentAddress = address
+      walletMode = 'web'
+      updateData(contract)
+
+    })
+  })
+}
+
+function getPassword (cb) {
+  $('#password-prompt').modal('show')
+
+  $('#confirm-tx').off('click')
+  $('#confirm-tx').on('click', function () {
+    var password = $('#password').val()
+    $('#password').val('')
+
+    $('#password-prompt').modal('hide')
+
+    cb(password)
+  })
+}
+
+function useWallet (cb) {
+  getPassword(function (password) {
+    keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+      if (err) throw err
+      cb(pwDerivedKey)
+    })
+  })
+}
+
+function loadWallet () {
+  useWallet(function (pwDerivedKey) {
+    try {
+      keystore.generateNewAddress(pwDerivedKey, 1)
+      currentAddress = keystore.getAddresses()[0]
+      walletMode = 'web'
+      updateData()
+
+    } catch (err) {
+      console.log(err)
+      alert(lang.incorrectPassword)
+    }
+  })
+}
+
+function recoverWallet () {
+  var secretSeed = prompt(lang.enterSeed)
+
+  if (!secretSeed)
+    return
+
+  var password = prompt(lang.enterPassword)
+
+  if (!password)
+    return
+
+  try {
+    lightwallet.keystore.createVault({
+      seedPhrase: secretSeed,
+      password: password,
+      hdPathString: `m/44'/60'/0'/0`,
+    }, function (err, ks) {
+      if (err) throw err
+
+      keystore = ks
+
+      // Store keystore in local storage
+      localStorage.setItem('keystore', keystore.serialize())
+
+      keystore.keyFromPassword(password, function (err, pwDerivedKey) {
+        if (err) throw err
+
+        keystore.generateNewAddress(pwDerivedKey, 1)
+        currentAddress = keystore.getAddresses()[0]
+        walletMode = 'web'
+        updateData()
+      })
+    })
+  } catch (err) {
+    console.log(err)
+    alert(lang.seedInvalid)
+  }
+}
+
 function detectWeb3 () {
+  if ($('#metamask-detecting').hasClass('visible')) {
+    $('#metamask-detecting').dimmer('hide')
+  }
+
   if (typeof web3 !== 'undefined') {
     web3js = new Web3(web3.currentProvider)
     web3Mode = 'metamask'
@@ -63,50 +235,70 @@ function detectWeb3 () {
     web3Mode = 'direct'
   }
 
+  var ks = localStorage.getItem('keystore')
+  if (ks !== null) {
+    keystore = lightwallet.keystore.deserialize(ks)
+    $('#unlock-wallet-container').show()
+  }
+
+  // var contractClass = web3js.eth.contract(abi)
+  // contract = contractClass.at(contractAddress)
+
   var registryClass = web3js.eth.contract(registryABI);
   registry = registryClass.at(registryAddress);
 
 
 
-  // Load token contract address because we're in /token/ page
-  if(window.location.pathname.includes("/token/")) {
-      var urlName = window.location.pathname.split("/token/");
-    console.log("Looking up " + urlName[1]);
-    registry.lookUp(web3.toHex(urlName[1]), "0x47656e7238", function (e,r) {
-  	if(r) {
-  		contractAddress = r;
-          loadApp();
-  	} else {
-  		console.log(e);
-  	}
-  })
-  } else {
-    registry.listKeys("Genr8", function(e,r) {
-    if(r) {
-      appAddresses = r;
-    }
-  })
-    registry.listKeys("Genr8ICO", function(e,r) {
-    if(r) {
-      ICOList = r;
-    }
-  })
+// Load token contract address because we're in /token/ page
+if(window.location.pathname.includes("/token/")) {
+  var urlName = window.location.pathname.split("/token/");
+  console.log("Looking up " + urlName[1]);
+  registry.lookUp(web3.toHex(urlName[1]), "0x47656e7238", function (e,r) {
+	if(r) {
+		contractAddress = r;
+    loadApp();
+	} else {
+		console.log(e);
+	}
+})
+
+
+} else {
+  registry.listKeys("Genr8", function(e,r) {
+  if(r) {
+    appAddresses = r;
   }
+})
+  registry.listKeys("Genr8ICO", function(e,r) {
+  if(r) {
+    ICOList = r;
+  }
+})
 }
 
-// Displays contracts in /apps/
+  // updateData()
+  // attachEvents()
+  // updateTokenInfo()
+}
+
+
+// TODO: Add an argument to the function
+// Which accepts page number, each page will display 12 contracts
+// in a grid sysem
 function displayContracts () {
   $('tbody')[0].innerHTML = '';
   $('#loading')[0].innerHTML = '';
 
   console.log("displayingContracts");
   var contractClass = web3js.eth.contract(genr8ABI)
+  // page number * 9 = i
   for(var i = 0; i < appAddresses.length; i++) {
     appList[i] = contractClass.at(appAddresses[i]);
     appList[i].name(function (e,r) {name = r})
     appList[i].symbol(function (e,r) {token = r})
 
     var promise = new Promise(function(resolve, reject) {
+      console.log(i);
       var name;
       var symbol;
       var balance;
@@ -150,7 +342,6 @@ function displayContracts () {
   }
 }
 
-// Appends the HTML for /apps/
 function appendHTML(name, symbol, balance, counter, decimals, revenue, address, pointer) {
   // TODO: Parse spaces in name ?
   console.log(name);
@@ -170,12 +361,19 @@ function appendHTML(name, symbol, balance, counter, decimals, revenue, address, 
 }
 
 
-// Used to instantiate the Genr8 contract with an address.
+
 function loadApp() {
+  // TODO: Get URL, /token/registryName
+  // use lookup function from the registry.
+  // function lookUp(bytes32 namespace, bytes32 key) public view returns(address){
+  //       return registry[namespace][key];
+  //   }
+  // returns address, use this address in contract
   var contractClass = web3js.eth.contract(genr8ABI)
   contract = contractClass.at(contractAddress)
 
   updateData()
+  attachEvents()
   updateTokenInfo()
 }
 
@@ -183,19 +381,75 @@ window.addEventListener('load', function () {
 
   setTimeout(detectWeb3, 500)
 
+  function call (address, method, params, amount) {
+    web3js.eth.getTransactionCount(currentAddress, function (err, nonce) {
+      if (err) throw err
+
+      web3js.eth.getGasPrice(function (err, gasPrice) {
+        if (err) throw err
+
+        // Median network gas price is too high most the time, divide by 10 or minimum 1 gwei
+        gasPrice = Math.max(gasPrice / 10, 1000000000)
+
+        var tx = {
+          'from': currentAddress,
+          'to': address,
+          'value': '0x' + amount.toString(16),
+          'gasPrice': '0x' + (gasPrice).toString(16),
+          'gasLimit': '0x' + (100000).toString(16),
+          'nonce': nonce,
+        }
+
+        var rawTx = lightwallet.txutils.functionTx(abi, method, params, tx)
+
+        useWallet(function (pwDerivedKey) {
+          try {
+            var signedTx = '0x' + lightwallet.signing.signTx(keystore, pwDerivedKey, rawTx, currentAddress)
+          } catch (err) {
+            console.log(err)
+            alert(lang.incorrectPassword)
+            return
+          }
+          web3js.eth.sendRawTransaction(signedTx, function (err, hash) {
+            if (err) {
+              alert(err.message.substring(0, err.message.indexOf('\n')))
+              throw err
+            }
+
+            $('#tx-hash').empty().append($('<a target="_blank" href="https://etherscan.io/tx/' + hash + '">' + hash + '</a>'))
+            $('#tx-confirmation').modal('show')
+          })
+        })
+      })
+    })
+  }
 
 // (web3.sha3(web3.toHex(web3.eth.accounts[0]), {encoding:"hex"}))
   function fund (address, amount) {
-    var counter = null;
-    contract.counter(function (e,r) {
-	       if(r == "0x0000000000000000000000000000000000000000") {
-           contract.invest({
-             value: convertEthToWei(amount)
-           }, function (e, r) {
-             // console.log(e, r)
-           })
-         }
-    })
+    if (walletMode === 'metamask') {
+      contract.buy(getCookie('masternode').split(';')[0], (web3.sha3(web3.toHex(web3.eth.accounts[0]), {encoding:"hex"})), {
+        value: convertEthToWei(amount)
+      }, function (e, r) {
+        // console.log(e, r)
+      })
+    } else if (walletMode === 'web') {
+      call(address, 'buy', [], convertEthToWei(amount))
+    }
+  }
+
+  function donate (amount) {
+    if (walletMode === 'metamask') {
+      const txobject = {
+        from: currentAddress,
+        to: donationAddress,
+        value: convertEthToWei(amount)
+      }
+      web3js.eth.sendTransaction(txobject, function (err, hash) {
+        console.log(err)
+      })
+    } else if (walletMode === 'web') {
+      call(donationAddress, 'buy', [], convertEthToWei(amount))
+    }
   }
 
   function sell (amount) {
@@ -264,12 +518,9 @@ window.addEventListener('load', function () {
     var numTokens = number / globalBuyPrice;
     $('.buy_Receive').text("With " + (number==0 ? 0 : number) + " ETH you can buy " + numTokens.toFixed(3) + " Tokens");
   })
+	})
 })
 
-
-/*
-* NOTE: Updates data like, tokens in circulation, token prices etc.
-*/
 function updateData () {
   clearTimeout(dataTimer)
 
