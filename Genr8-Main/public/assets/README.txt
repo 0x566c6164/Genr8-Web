@@ -1,1 +1,0 @@
-Assets are not available on Github for various reasons.
