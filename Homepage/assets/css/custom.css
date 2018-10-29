@@ -1,5 +1,9 @@
 /* Add here all your css styles (customizations) */
 
+/* /////////////////////
+* NOTE: HEADER START  //
+* & Carousel Canvas   //
+ *********************/
 #header {
   position: absolute;
   width: 100%;
@@ -43,16 +47,18 @@
 
 .icon-block {
   border-top: 1px solid gray;
-
 }
 
+/* ////////////////////////
+* NOTE: SOCIAL START    //
+* & ICONS              //
+* & Links styling     //
+ *********************/
 .social {
   background-color: #f7f7f7;
 }
 
-i {
-  color: #323232;
-}
+i {color: #323232;}
 
 .link {
   color: #323232;
@@ -68,11 +74,14 @@ i {
   transition: all 0.25s;
 }
 
+/* //////////////////////
+* NOTE: FOOTER START   //
+ **********************/
 footer {
   background-color: #1B1B1F;
 }
 
-.fa-github-square:hover {
+#footer-hover:hover  {
   color: #e6ae49;
 }
 
@@ -88,7 +97,9 @@ highlight {
 
 
 
-/* FLOAT ANIM */
+/* ///////////////////////////
+* NOTE: ANIMATIONS START   //
+ **************************/
 #img-float {
 	transform: translatey(10px);
 	animation: float 5s ease-in-out infinite !important;
@@ -107,8 +118,6 @@ highlight {
 }
 
 #img-rotate {
-    box-shadow: 0 2px 5px 0 gray;
-    border-radius: 200px;
     animation: rotation 5s linear infinite !important;
   }
 

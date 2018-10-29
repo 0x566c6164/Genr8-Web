@@ -1,0 +1,567 @@
+{# Settings #}
+{% set root = "../../" %}
+{% set adminRoot = "../" %}
+{% set title = "Slider Controls" %}
+{% set layoutTheme = "dark" %}
+{% set isSubMenu7 = "unCollapsed" %}
+{% set isSubMenu7Elements = "unCollapsed" %}
+{% set activeMenuItem = "forms-elemets-slider-controls" %}
+{% set breadcrumbs = [
+  {
+    breadcrumb: "Dashboard",
+    href: "#!"
+  }, {
+    breadcrumb: " Forms",
+    href: "#!"
+  }, {
+    breadcrumb: " Elements",
+    href: "#!"
+  }
+] %}
+
+{% include "html/assets/include/nunjucks/partials/head.njk" %}
+{% include "html/assets/include/nunjucks/partials/core-fonts.njk" %}
+{% include "html/assets/include/nunjucks/partials/core-css.njk" %}
+{% include "html/assets/include/nunjucks/partials/core-icons.njk" %}
+
+<link rel="stylesheet" href="{{ adminRoot }}assets/vendor/hs-admin-icons/hs-admin-icons.css">
+<link rel="stylesheet" href="{{ root }}assets/vendor/animate.css">
+<link rel="stylesheet" href="{{ root }}assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" href="{{ adminRoot }}assets/vendor/bootstrap-select/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="{{ adminRoot }}assets/vendor/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+<link rel="stylesheet" href="{{ adminRoot }}assets/vendor/ion-range-slider/css/ion.rangeSlider.css">
+<link rel="stylesheet" href="{{ adminRoot }}assets/vendor/chartist-js/chartist.min.css">
+
+<link rel="stylesheet" href="{{ root }}assets/vendor/hamburgers/hamburgers.min.css">
+
+{% include "html/admin-template/assets/include/nunjucks/partials/css/css-unify-admin.njk" %}
+{% include "html/assets/include/nunjucks/partials/css/css-custom.njk" %}
+</head>
+
+<body>
+<main>
+	{% include "html/admin-template/assets/include/nunjucks/partials/blocks/headers/header-fixed.njk" %}
+
+	<section class="container-fluid px-0 g-pt-65">
+		<div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+			{% include "html/admin-template/assets/include/nunjucks/partials/blocks/sidebars/sidebar-static.njk" %}
+
+      <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+        {% include "html/admin-template/assets/include/nunjucks/partials/blocks/breadcrumbs/breadcrumb-v1.njk" %}
+
+        <div class="g-pa-20">
+          <h1 class="g-font-weight-300 g-font-size-28 g-color-black g-mb-28">{{ title }}</h1>
+
+          <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-20 g-mb-30">
+            <!-- Slider Forms -->
+            <form>
+              <h3 class="h6 g-font-weight-700 g-mb-20">Basic slider</h3>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- Regular Slider Option One -->
+                  <div class="form-group g-mb-20">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-min="0" data-max="115" data-from="25" data-to="100" data-result-min="#result1min" data-result-max="#result1max">
+                  </div>
+
+                  <div class="form-group d-flex g-mb-30 g-mb-0--md">
+                    <input id="result1min" class="form-control text-center g-width-40 g-brd-gray-light-v7 g-px-5 g-py-8" type="text">
+                    <input id="result1max" class="form-control text-center g-width-40 g-brd-gray-light-v7 g-px-5 g-py-8 ml-auto" type="text">
+                  </div>
+                  <!-- End Regular Slider Option One -->
+                </div>
+
+                <div class="col-md-4">
+                  <!-- Regular Slider Option Two -->
+                  <div class="form-group g-mb-20">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4 u-slider--v4--single" data-type="single" data-min="0" data-max="125" data-from="100" data-result-min="#result2min">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-30 g-mb-0--md">
+                    <span class="g-color-gray-light-v11">Select Required Amount</span>
+
+                    <div class="input-group g-width-100 ml-auto">
+                      <div class="input-group-prepend g-bg-gray-light-v8">
+                        <div class="input-group-text justify-content-center g-width-40 g-brd-gray-light-v7">$</div>
+                      </div>
+
+                      <input id="result2min" class="form-control text-center g-brd-gray-light-v7 g-px-5 g-py-8 ml-auto" type="text">
+                    </div>
+                  </div>
+                  <!-- End Regular Slider Option Two -->
+                </div>
+
+                <div class="col-md-4">
+                  <!-- Regular Slider Option Three -->
+                  <div class="form-group g-mb-20">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4 u-slider--v4--step-rounded" data-type="single" data-grid="true" data-step="25" data-min="0" data-max="100" data-from="75" data-result-min="#result3min">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center mb-0">
+                    <span id="result3min"></span><span class="g-color-gray-light-v11 ml-2">Selected Amount</span>
+                  </div>
+                  <!-- End Regular Slider Option Three -->
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-20 g-mb-30">
+            <!-- Slider Forms -->
+            <form>
+              <h3 class="h6 g-font-weight-700 g-mb-20">Range slider</h3>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- Range Slider Option One -->
+                  <div class="form-group g-mb-30 g-mb-0--md">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4 u-slider--v4--grid" data-type="double" data-grid="true" data-hide-from-to="false" data-min="0" data-max="100">
+                  </div>
+                  <!-- End Range Slider Option One -->
+                </div>
+
+                <div class="col-md-4">
+                  <!-- Range Slider Option Two -->
+                  <div class="form-group mb-0">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4 u-slider--v4--grid-v2" data-type="double" data-grid="true" data-hide-from-to="false" data-min="0" data-max="100">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-20 g-mb-0--md">
+                    <span>Min</span>
+                    <span class="ml-auto">Max</span>
+                  </div>
+                  <!-- End Range Slider Option Two -->
+                </div>
+
+                <div class="col-md-4">
+                  <!-- Range Slider Option Three -->
+                  <div class="form-group mb-0">
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4 u-slider--v4--grid" data-type="single" data-grid="true" data-step="25" data-min="0" data-max="100" data-from="75">
+                  </div>
+                  <!-- End Range Slider Option Three -->
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-20 g-mb-30">
+            <!-- Slider Forms -->
+            <form>
+              <h3 class="h6 g-font-weight-700 g-mb-20">Range with Bars</h3>
+
+              <div class="row">
+                <!-- Range Slider Option One
+                <div class="col-md-4">
+                  <div class="form-group g-mb-20">
+                    <div class="js-bar-chart g-line-height-0 g-mb-minus-8"
+                        data-series='[
+                          [2,3,5,7,8,5,3,2,3,6,5,4,7,5,4,3,2]
+                        ]'
+                        data-is-show-axis-x="false"
+                        data-is-show-axis-y="false"
+                        data-is-full-width="true"
+                        data-is-stack-bars="true"
+                        data-height="86px"
+                        data-high="8"
+                        data-low="0"
+                        data-distance="0"
+                        data-stroke-width="21"
+                        data-stroke-color="#f5f9f9"></div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-30 g-mb-0--md">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                </div>
+                End Range Slider Option One -->
+
+                <div class="col-md-4">
+                  <!-- Range Slider Option Two -->
+                  <div class="form-group g-mb-20">
+                    <div class="g-pos-rel g-mb-minus-8" style="height: 86px;">
+                      <div class="js-bar-chart g-pos-abs w-100 g-line-height-0"
+                          data-series='[
+                            [2,3,5,7,8,5,3,2,3,6,5,4,7,5,4,3,2]
+                          ]'
+                          data-is-show-axis-x="false"
+                          data-is-show-axis-y="false"
+                          data-is-full-width="true"
+                          data-is-stack-bars="true"
+                          data-height="86px"
+                          data-high="8"
+                          data-low="0"
+                          data-distance="0"
+                          data-stroke-width="21"
+                          data-stroke-color="#f5f9f9"></div>
+
+                      <div id="foregroundChart1" class="g-pos-abs h-100 g-overflow-hidden" style="width: 100%; left: 0;">
+                        <div class="js-bar-chart g-pos-abs g-line-height-0"
+                            data-series='[
+                              [2,3,5,7,8,5,3,2,3,6,5,4,7,5,4,3,2]
+                            ]'
+                            data-is-show-axis-x="false"
+                            data-is-show-axis-y="false"
+                            data-is-full-width="true"
+                            data-is-stack-bars="true"
+                            data-height="86px"
+                            data-high="8"
+                            data-low="0"
+                            data-distance="0"
+                            data-stroke-width="21"
+                            data-stroke-color="#daf5fa"></div>
+                      </div>
+                    </div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-foreground-target="#foregroundChart1" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-30 g-mb-0--md">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                  <!-- End Range Slider Option Two -->
+                </div>
+
+                <!-- Range Slider Option Three
+                <div class="col-md-4">
+                  <div class="form-group g-mb-20">
+                    <div class="js-bar-chart g-line-height-0 g-mb-minus-8"
+                        data-series='[
+                          [2,3,5,7,8,5,3,2,3,6,5,4,7,5,4,3,2]
+                        ]'
+                        data-is-show-axis-x="false"
+                        data-is-show-axis-y="false"
+                        data-is-full-width="true"
+                        data-is-stack-bars="true"
+                        data-height="86px"
+                        data-high="8"
+                        data-low="0"
+                        data-distance="0"
+                        data-stroke-width="21"
+                        data-stroke-color="#daf5fa"></div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center mb-0">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                </div>
+                End Range Slider Option Three -->
+              </div>
+            </form>
+            <!-- End Slider Forms -->
+          </div>
+
+          <div class="g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-20 g-mb-30">
+            <!-- Slider Forms -->
+            <form>
+              <h3 class="h6 g-font-weight-700 g-mb-20">Range with Graphs</h3>
+
+              <div class="row">
+                <!-- Range Slider Option One
+                <div class="col-md-4">
+                  <div class="form-group g-mb-20">
+                    <div class="js-area-chart u-area-chart--v1 g-pos-rel g-line-height-0 g-mb-minus-8"
+                      data-height="86px"
+                      data-high="1500"
+                      data-low="0"
+                      data-offset-x="0"
+                      data-offset-y="0"
+                      data-is-show-area="true"
+                      data-is-show-line="false"
+                      data-is-show-point="false"
+                      data-is-full-width="true"
+                      data-is-stack-bars="true"
+                      data-is-show-axis-x="false"
+                      data-is-show-axis-y="false"
+                      data-is-show-tooltips="false"
+                      data-fill-opacity="1"
+                      data-fill-colors='["#f5f9f9"]'
+                      data-stroke-color="#f5f9f9"
+                      data-text-color-x="#000000"
+                      data-text-offset-top-x="0"
+                      data-text-size-y="14px"
+                      data-text-color-y="#53585e"
+                      data-points-colors='["#f5f9f9"]'
+                      data-series='[
+                         [
+                           {"value": 0},
+                           {"value": 100},
+                           {"value": 700},
+                           {"value": 500},
+                           {"value": 1500},
+                           {"value": 200},
+                           {"value": 100},
+                           {"value": 50},
+                           {"value": 0}
+                         ]
+                       ]'
+                      data-labels='["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]'></div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-30 g-mb-0--md">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                </div>
+                End Range Slider Option One -->
+
+                <div class="col-md-4">
+                  <!-- Range Slider Option Two -->
+                  <div class="form-group g-mb-20">
+                    <div class="g-pos-rel g-mb-minus-8" style="height: 86px;">
+                      <div class="js-area-chart u-area-chart--v1 g-pos-abs w-100 g-line-height-0"
+                        data-height="86px"
+                        data-high="1500"
+                        data-low="0"
+                        data-offset-x="0"
+                        data-offset-y="0"
+                        data-is-show-area="true"
+                        data-is-show-line="false"
+                        data-is-show-point="false"
+                        data-is-full-width="true"
+                        data-is-stack-bars="true"
+                        data-is-show-axis-x="false"
+                        data-is-show-axis-y="false"
+                        data-is-show-tooltips="false"
+                        data-fill-opacity="1"
+                        data-fill-colors='["#f5f9f9"]'
+                        data-stroke-color="#f5f9f9"
+                        data-text-color-x="#000000"
+                        data-text-offset-top-x="0"
+                        data-text-size-y="14px"
+                        data-text-color-y="#53585e"
+                        data-points-colors='["#f5f9f9"]'
+                        data-series='[
+                           [
+                             {"value": 0},
+                             {"value": 100},
+                             {"value": 700},
+                             {"value": 500},
+                             {"value": 1500},
+                             {"value": 200},
+                             {"value": 100},
+                             {"value": 50},
+                             {"value": 0}
+                           ]
+                         ]'
+                        data-labels='["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]'></div>
+
+                        <div id="foregroundChart2" class="g-pos-abs h-100 g-overflow-hidden" style="width: 100%; left: 0;">
+                          <div class="js-area-chart u-area-chart--v1 g-pos-abs g-line-height-0"
+                            data-height="86px"
+                            data-high="1500"
+                            data-low="0"
+                            data-offset-x="0"
+                            data-offset-y="0"
+                            data-is-show-area="true"
+                            data-is-show-line="false"
+                            data-is-show-point="false"
+                            data-is-full-width="true"
+                            data-is-stack-bars="true"
+                            data-is-show-axis-x="false"
+                            data-is-show-axis-y="false"
+                            data-is-show-tooltips="false"
+                            data-fill-opacity="1"
+                            data-fill-colors='["#daf5fa"]'
+                            data-stroke-color="#daf5fa"
+                            data-text-color-x="#000000"
+                            data-text-offset-top-x="0"
+                            data-text-size-y="14px"
+                            data-text-color-y="#53585e"
+                            data-points-colors='["#daf5fa"]'
+                            data-series='[
+                               [
+                                 {"value": 0},
+                                 {"value": 100},
+                                 {"value": 700},
+                                 {"value": 500},
+                                 {"value": 1500},
+                                 {"value": 200},
+                                 {"value": 100},
+                                 {"value": 50},
+                                 {"value": 0}
+                               ]
+                             ]'
+                            data-labels='["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]'></div>
+                        </div>
+                    </div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-foreground-target="#foregroundChart2" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center g-mb-30 g-mb-0--md">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                  <!-- End Range Slider Option Two -->
+                </div>
+
+                <!-- Range Slider Option Three
+                <div class="col-md-4">
+                  <div class="form-group g-mb-20">
+                    <div class="js-area-chart u-area-chart--v1 g-pos-rel g-line-height-0 g-mb-minus-8"
+                      data-height="86px"
+                      data-high="1500"
+                      data-low="0"
+                      data-offset-x="0"
+                      data-offset-y="0"
+                      data-is-show-area="true"
+                      data-is-show-line="false"
+                      data-is-show-point="false"
+                      data-is-full-width="true"
+                      data-is-stack-bars="true"
+                      data-is-show-axis-x="false"
+                      data-is-show-axis-y="false"
+                      data-is-show-tooltips="false"
+                      data-fill-colors='["#daf5fa"]'
+                      data-stroke-color="#daf5fa"
+                      data-text-color-x="#000000"
+                      data-text-offset-top-x="0"
+                      data-text-size-y="14px"
+                      data-text-color-y="#53585e"
+                      data-points-colors='["#daf5fa"]'
+                      data-fill-opacity="1"
+                      data-series='[
+                         [
+                           {"value": 0},
+                           {"value": 100},
+                           {"value": 700},
+                           {"value": 500},
+                           {"value": 1500},
+                           {"value": 200},
+                           {"value": 100},
+                           {"value": 50},
+                           {"value": 0}
+                         ]
+                       ]'
+                      data-labels='["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]'></div>
+                    <input class="js-range-slider" type="text" data-extra-classes="u-slider--v4" data-type="double" data-min="0" data-max="1500">
+                  </div>
+
+                  <div class="form-group d-flex align-items-center mb-0">
+                    <div>
+                      <span class="g-color-gray-light-v11 mr-2">Min Price:</span>$0
+                    </div>
+
+                    <div class="ml-auto">
+                      <span class="g-color-gray-light-v11 mr-2">Max Price:</span>$1500
+                    </div>
+                  </div>
+                </div>
+                End Range Slider Option Three -->
+              </div>
+            </form>
+            <!-- End Slider Forms -->
+          </div>
+        </div>
+
+        {% include "html/admin-template/assets/include/nunjucks/partials/blocks/footers/footer-sticky.njk" %}
+      </div>
+		</div>
+	</section>
+</main>
+
+{% include "html/admin-template/assets/include/nunjucks/partials/core-js.njk" %}
+
+<!-- JS Plugins Init. -->
+<script src="{{ root }}assets/vendor/appear.js"></script>
+<script src="{{ adminRoot }}assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="{{ root }}assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="{{ adminRoot }}assets/vendor/ion-range-slider/js/ion.rangeSlider.min.js"></script>
+<script src="{{ adminRoot }}assets/vendor/chartist-js/chartist.min.js"></script>
+
+<!-- JS Unify -->
+<script src="{{ root }}assets/js/hs.core.js"></script>
+<script src="{{ adminRoot }}assets/js/components/hs.side-nav.js"></script>
+<script src="{{ root }}assets/js/helpers/hs.hamburgers.js"></script>
+<script src="{{ root }}assets/js/components/hs.dropdown.js"></script>
+<script src="{{ root }}assets/js/components/hs.scrollbar.js"></script>
+<script src="{{ adminRoot }}assets/js/components/hs.range-slider.js"></script>
+<script src="{{ adminRoot }}assets/js/components/hs.area-chart.js"></script>
+<script src="{{ adminRoot }}assets/js/components/hs.bar-chart.js"></script>
+<script src="{{ root }}assets/js/helpers/hs.focus-state.js"></script>
+
+<!-- JS Custom -->
+<script src="{{ root }}assets/js/custom.js"></script>
+
+<!-- JS Plugins Init. -->
+<script>
+  $(document).on('ready', function () {
+    // initialization of custom select
+    $('.js-select').selectpicker();
+
+    // initialization of sidebar navigation component
+    $.HSCore.components.HSSideNav.init('.js-side-nav');
+
+    // initialization of hamburger
+    $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+    // initialization of HSDropdown component
+    $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
+      dropdownHideOnScroll: false
+    });
+
+    // initialization of custom scrollbar
+    $.HSCore.components.HSScrollBar.init($('.js-custom-scroll'));
+
+    // initialization of forms
+    $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
+    // initialization of charts
+    $.HSCore.components.HSAreaChart.init('.js-area-chart');
+    $.HSCore.components.HSBarChart.init('.js-bar-chart');
+
+    // initialization of sidebar navigation component
+    $.HSCore.components.HSSideNav.init('.js-side-nav', {
+      afterOpen: function() {
+        setTimeout(function() {
+          $.HSCore.components.HSAreaChart.init('.js-area-chart');
+          $.HSCore.components.HSBarChart.init('.js-bar-chart');
+        }, 800);
+      },
+      afterClose: function() {
+        setTimeout(function() {
+          $.HSCore.components.HSAreaChart.init('.js-area-chart');
+          $.HSCore.components.HSBarChart.init('.js-bar-chart');
+        }, 800);
+      }
+    });
+  });
+
+  $(window).on('resize', function() {
+    setTimeout(function() {
+      $.HSCore.components.HSAreaChart.init('.js-area-chart');
+      $.HSCore.components.HSBarChart.init('.js-bar-chart');
+    }, 800);
+  });
+</script>
+</body>
+</html>

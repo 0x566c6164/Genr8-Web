@@ -1,0 +1,202 @@
+/*------------------------------------
+Slider v4
+------------------------------------*/
+
+.u-slider--v4 {
+  height: 20px;
+
+  .irs {
+    height: 20px;
+  }
+
+  .irs-line {
+    height: 6px;
+    top: 8px;
+  }
+
+  .irs-line-left {
+    left: 0;
+    height: 6px;
+    background-color: #f1f5f5;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .irs-line-mid {
+    height: 6px;
+    background-color: #f1f5f5;
+  }
+
+  .irs-line-right {
+    right: 0;
+    height: 6px;
+    background-color: #f1f5f5;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .irs-bar {
+    height: 6px;
+    top: 8px;
+    background-color: #1cc9e4;
+  }
+
+  .irs-bar-edge {
+    top: 8px;
+    left: 0;
+    height: 6px;
+    width: 9px;
+    border-radius: 3px 0 0 3px;
+    background-color: #1cc9e4;
+  }
+
+  .irs-slider {
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .1);
+  }
+
+  .irs-from,
+  .irs-to,
+  .irs-single {
+    display: inline-block;
+    min-width: 42px;
+    background-color: #f5f9f9;
+    color: #53585e;
+    font-size: 14px;
+    text-shadow: none;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}
+
+.u-slider--v4--grid {
+  height: 120px;
+
+  .irs {
+    height: 120px;
+  }
+
+  .irs-line {
+    top: 55px;
+  }
+
+  .irs-bar {
+    top: 55px;
+  }
+
+  .irs-bar-edge {
+    top: 55px;
+  }
+
+  .irs-slider {
+    top: 51px;
+  }
+
+  .irs-grid {
+    height: 45px;
+  }
+
+  .irs-grid-text {
+    display: inline-block;
+    min-width: 40px;
+    line-height: 1;
+    font-size: 14px;
+    color: #53585e;
+    border-radius: 10px;
+    padding: 5px;
+
+    &.current {
+      background: #f5f9f9;
+      color: #22bfdd;
+    }
+  }
+
+  .irs-grid-pol {
+    height: 14px;
+    background: #e1eaea;
+  }
+
+  .irs-grid-pol.small {
+    display: none;
+  }
+}
+
+.u-slider--v4--grid-v2 {
+  height: 96px;
+
+  .irs {
+    height: 96px;
+  }
+
+  .irs-line {
+    top: 55px;
+  }
+
+  .irs-bar {
+    top: 55px;
+  }
+
+  .irs-bar-edge {
+    top: 55px;
+  }
+
+  .irs-slider {
+    top: 51px;
+  }
+
+  .irs-grid {
+    height: 21px;
+  }
+
+  .irs-grid-text {
+    display: none;
+  }
+
+  .irs-grid-pol {
+    height: 8px;
+    background: #e1eaea;
+  }
+
+  .irs-grid-pol.small {
+    display: none;
+  }
+}
+
+.u-slider--v4--step-rounded {
+  .irs-grid {
+    bottom: 4px;
+    height: 10px;
+    margin-left: -5px;
+  }
+
+  .irs-line-left {
+    left: 3px;
+  }
+
+  .irs-line-right {
+    right: 3px;
+  }
+
+  .irs-bar-edge {
+    left: 3px;
+  }
+
+  .irs-grid-pol.small,
+  .irs-grid-text {
+    display: none;
+  }
+
+  .irs-grid-pol {
+    width: 10px;
+    height: 10px;
+    background-color: #1cc9e4;
+    border-radius: 50%;
+  }
+
+  .irs-grid-text.current ~ .irs-grid-pol {
+    background: #f1f5f5;
+  }
+}

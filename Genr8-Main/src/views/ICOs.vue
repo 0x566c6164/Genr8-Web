@@ -67,16 +67,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  #icos {
-    width: 80%;
-    padding: 25px;
-  }
 
-  #icoWrapper {
-    padding: 50px;
-  }
-
-  #progressBar {
-    width: 350px;
-  }
 </style>
