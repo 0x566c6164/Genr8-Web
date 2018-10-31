@@ -9,7 +9,7 @@
       <router-link to="/wiki/"><span class="nav-text-2" id="wiki">Wiki</span></router-link>
       <router-link to="/api/"><span class="nav-text-2" id="api">API</span></router-link>
     </div> -->
-    <router-view/>
+    <router-view></router-view>
       <!-- All HTML + CSS from /components/ goes into #Wrapper div -->
         <!-- <footer>
         <p id="footer-text-1"> © Genr8 2018. All Rights Reserved </p>

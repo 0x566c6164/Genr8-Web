@@ -31,67 +31,69 @@ var genr8ABI = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":""
 // ABI of Registry
 var registryABI = [{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"namespace","type":"bytes32"},{"indexed":false,"name":"key","type":"bytes32"},{"indexed":false,"name":"value","type":"address"},{"indexed":false,"name":"setter","type":"address"}],"name":"RegistryEntry","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":false,"inputs":[{"name":"who","type":"address"},{"name":"status","type":"bool"}],"name":"setAdministrator","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"who","type":"address"},{"name":"status","type":"bool"}],"name":"setWhitelist","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"namespace","type":"bytes32"},{"name":"key","type":"bytes32"},{"name":"value","type":"address"}],"name":"setRegistry","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"namespace","type":"bytes32"},{"name":"key","type":"bytes32"}],"name":"lookUp","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"listNamespaces","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"key","type":"bytes32"}],"name":"listKeys","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"namespace","type":"bytes32"}],"name":"isNamespaceInUse","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}]
 
-function updateEthPrice () {
-  clearTimeout(ethPriceTimer)
-  if( currency === 'EPY' ){
-    ethPrice = 1 / (sellPrice + ((buyPrice - sellPrice) / 2))
-    ethPriceTimer = setTimeout(updateEthPrice, 10000)
-  } else {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=' + currency, function (result) {
-      var eth = result[0]
-      ethPrice = parseFloat(eth['price_' + currency.toLowerCase()])
-      ethPriceTimer = setTimeout(updateEthPrice, 10000)
-    })
-  }
-}
+async function detectWeb3 () {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            web3js = new Web3(web3.currentProvider)
+            web3Mode = 'metamask'
+            var registryClass = web3js.eth.contract(registryABI);
+            registry = registryClass.at(registryAddress);
 
-function convertEthToWei (e) {
-  return 1e18 * e
-}
-
-function convertWeiToEth (e) {
-  return e / 1e18
-}
-
-function detectWeb3 () {
-  if (typeof web3 !== 'undefined') {
-    web3js = new Web3(web3.currentProvider)
-    web3Mode = 'metamask'
-    currentAddress = web3js.eth.accounts[0]
-  } else {
-    web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/Fi6gFcfwLWXX6YUOnke8'))
-    web3Mode = 'direct'
-  }
-
-  var registryClass = web3js.eth.contract(registryABI);
-  registry = registryClass.at(registryAddress);
-
-
-
-  // Load token contract address because we're in /token/ page
-  if(window.location.pathname.includes("/token/")) {
-      var urlName = window.location.pathname.split("/token/");
-    console.log("Looking up " + urlName[1]);
-    registry.lookUp(web3.toHex(urlName[1]), "0x47656e7238", function (e,r) {
-  	if(r) {
-  		contractAddress = r;
-          loadApp();
-  	} else {
-  		console.log(e);
-  	}
-  })
-  } else {
-    registry.listKeys("Genr8", function(e,r) {
-    if(r) {
-      appAddresses = r;
+            // Load token contract address because we're in /token/ page
+            if(window.location.pathname.includes("/token/")) {
+              var urlName = window.location.pathname.split("/token/");
+              console.log("Looking up " + urlName[1]);
+              registry.lookUp(web3.toHex(urlName[1]), "0x47656e7238", function (e,r) {
+            	if(r) {
+            		contractAddress = r;
+                loadApp();
+            	} else {console.log(e);}
+            })
+            /*
+            * Load /apps/ from registry
+            */
+            } else {
+              console.log("loading apps from registry");
+              registry.listKeys("Genr8", function(e,r) {
+              if(r) {
+                appAddresses = r;
+              }
+            })
+              registry.listKeys("Genr8ICO", function(e,r) {
+              if(r) {
+                ICOList = r;
+              }
+            })
+            }
+        } catch (error) {
+            // User denied account access...
+        }
     }
-  })
-    registry.listKeys("Genr8ICO", function(e,r) {
-    if(r) {
-      ICOList = r;
+    // Legacy dapp browsers...
+    else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+        // Acccounts always exposed
+        web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/Fi6gFcfwLWXX6YUOnke8'))
+        web3Mode = 'direct'
     }
-  })
-  }
+    // Non-dapp browsers...
+    else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+
+  // if (typeof web3 !== 'undefined') {
+  //   web3js = new Web3(web3.currentProvider)
+  //   web3Mode = 'metamask'
+  //   currentAddress = web3js.eth.accounts[0]
+  // } else {
+  //   web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/Fi6gFcfwLWXX6YUOnke8'))
+  //   web3Mode = 'direct'
+  // }
 }
 
 // Displays contracts in /apps/
@@ -170,7 +172,7 @@ function loadApp() {
   updateTokenInfo()
 }
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
 
   setTimeout(detectWeb3, 500)
 
@@ -258,7 +260,7 @@ window.addEventListener('load', function () {
 })
 
 
-/*
+/**********************************
 * NOTE: Updates data like, tokens in circulation, token prices etc.
 */
 function updateData () {
@@ -295,4 +297,29 @@ function updateTokenInfo() {
 	infoTimer = setTimeout(function () {
 	    updateTokenInfo()
 	}, web3Mode === 'metamask' ? 5000 : 10000)
+}
+
+/**************************
+* API HELPERS & CALCULATORS
+*/
+function updateEthPrice () {
+  clearTimeout(ethPriceTimer)
+  if( currency === 'EPY' ){
+    ethPrice = 1 / (sellPrice + ((buyPrice - sellPrice) / 2))
+    ethPriceTimer = setTimeout(updateEthPrice, 10000)
+  } else {
+    $.getJSON('https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=' + currency, function (result) {
+      var eth = result[0]
+      ethPrice = parseFloat(eth['price_' + currency.toLowerCase()])
+      ethPriceTimer = setTimeout(updateEthPrice, 10000)
+    })
+  }
+}
+
+function convertEthToWei (e) {
+  return 1e18 * e
+}
+
+function convertWeiToEth (e) {
+  return e / 1e18
 }

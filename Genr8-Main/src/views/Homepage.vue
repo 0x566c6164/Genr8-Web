@@ -12,7 +12,7 @@
             <!-- End Logo -->
 
             <!-- Sidebar Toggler -->
-            <a class="js-side-nav u-header__nav-toggler d-flex align-self-center ml-auto" href="#" data-hssm-class="u-side-nav--mini u-sidebar-navigation-v1--mini" data-hssm-body-class="u-side-nav-mini" data-hssm-is-close-all-except-this="true" data-hssm-target="#sideNav">
+            <a id="toggler" class="js-side-nav u-header__nav-toggler d-flex align-self-center ml-auto" href="#" data-hssm-class="u-side-nav--mini u-sidebar-navigation-v1--mini" data-hssm-body-class="u-side-nav-mini" data-hssm-is-close-all-except-this="true" data-hssm-target="#sideNav">
               <i class="hs-admin-align-left"></i>
             </a>
             <!-- End Sidebar Toggler -->
@@ -121,6 +121,7 @@
         </div>
         <!-- End Sidebar Nav -->
 
+        <router-view></router-view>
 
         <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
           <!-- Footer -->
@@ -190,11 +191,21 @@
 </template>
 
 <script>
-// @ is an alias to /src
 
 export default {
   name: "Homepage"
+  // mounted() {
+  //     let popper = document.createElement('script')
+  //     popper.setAttribute('src', '../assets/vendor/popper.min.js')
+  //     document.body.appendChild(popper)
+  //     let tooltip = document.createElement('script')
+  //     tooltip.setAttribute('src', '../assets/vendor/chartist-js-tooltip/chartist-plugin-tooltip.js')
+  //     document.body.appendChild(tooltip)
+  //
+  //     console.log("mount successfull")
+  //   }
 };
+
 </script>
 
 <style scoped lang="scss">

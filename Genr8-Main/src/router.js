@@ -26,7 +26,7 @@ export default new Router({
           path: "/icos/",
           name: "icos",
           component: ICOs
-        },
+        }
       ]
     },
     {
