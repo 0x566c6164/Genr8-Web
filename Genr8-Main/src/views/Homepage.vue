@@ -30,7 +30,7 @@
           <ul id="sideNavMenu" class="u-sidebar-navigation-v1-menu u-side-nav--top-level-menu g-min-height-100vh mb-0">
             <!-- Dashboards -->
             <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-                <router-link to="/" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12 active" data-hssm-target="#subMenu1">
+                <router-link to="/" id="Home" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#subMenu1">
                   <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18 ">
                   <i class="hs-admin-server"></i>
                   </span>
@@ -44,7 +44,7 @@
 
             <!-- App Views -->
             <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-              <router-link to="/apps/" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#subMenu4">
+              <router-link to="/apps/" id="Apps" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#subMenu4">
                 <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
                 <i class="hs-admin-layers"></i>
                 </span>
@@ -121,66 +121,20 @@
         </div>
         <!-- End Sidebar Nav -->
 
-        <router-view></router-view>
-
         <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+          <!-- Router View -->
+          <div id="router-view" class="g-pa-20">
+            welcome to dexstreet
+            <router-view>
+              <h1>Welcome</h1>
+            </router-view>
+          </div>
           <!-- Footer -->
-          <footer id="footer" class="u-footer--bottom-sticky g-bg-white g-color-gray-dark-v6 g-brd-top g-brd-gray-light-v7 g-pa-20">
+          <footer id="footer" class="u-footer--bottom-sticky g-color-white g-pa-20">
             <div class="row align-items-center">
-              <!-- Footer Nav -->
-              <div class="col-md-4 g-mb-10 g-mb-0--md">
-                <ul class="list-inline text-center text-md-left mb-0">
-                  <li class="list-inline-item">
-                    <a class="g-color-gray-dark-v6 g-color-secondary--hover" href="#">FAQ</a>
-                  </li>
-                  <li class="list-inline-item">
-                    <span class="g-color-gray-dark-v6">|</span>
-                  </li>
-                  <li class="list-inline-item">
-                    <a class="g-color-gray-dark-v6 g-color-secondary--hover" href="#">Support</a>
-                  </li>
-                  <li class="list-inline-item">
-                    <span class="g-color-gray-dark-v6">|</span>
-                  </li>
-                  <li class="list-inline-item">
-                    <a class="g-color-gray-dark-v6 g-color-secondary--hover" href="#">Contact Us</a>
-                  </li>
-                </ul>
+              <div class="col-lg-12 text-center">
+                <small class="g-font-size-default">&copy; 2018 DexStreet.io All Rights Reserved.</small>
               </div>
-              <!-- End Footer Nav -->
-
-              <!-- Footer Socials -->
-              <div class="col-md-4 g-mb-10 g-mb-0--md">
-                <ul class="list-inline g-font-size-16 text-center mb-0">
-                  <li class="list-inline-item g-mx-10">
-                    <a href="#!" class="g-color-facebook g-color-secondary--hover">
-                      <i class="fa fa-facebook-square"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item g-mx-10">
-                    <a href="#!" class="g-color-google-plus g-color-secondary--hover">
-                      <i class="fa fa-google-plus"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item g-mx-10">
-                    <a href="#!" class="g-color-black g-color-secondary--hover">
-                      <i class="fa fa-github"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item g-mx-10">
-                    <a href="#!" class="g-color-twitter g-color-secondary--hover">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <!-- End Footer Socials -->
-
-              <!-- Footer Copyrights -->
-              <div class="col-md-4 text-center text-md-right">
-                <small class="d-block g-font-size-default">&copy; 2018 Htmlstream. All Rights Reserved.</small>
-              </div>
-              <!-- End Footer Copyrights -->
             </div>
           </footer>
           <!-- End Footer -->
@@ -193,7 +147,13 @@
 <script>
 
 export default {
-  name: "Homepage"
+  name: "Homepage",
+  methods: {
+    toggleOff: function(){
+            $()
+          // some code to filter users
+        }
+  }
   // mounted() {
   //     let popper = document.createElement('script')
   //     popper.setAttribute('src', '../assets/vendor/popper.min.js')
@@ -209,5 +169,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+footer {
+  background-color: #222e44;
+}
+
 
 </style>

@@ -49,10 +49,10 @@
   border-top: 1px solid gray;
 }
 
-/* ////////////////////////
-* NOTE: SOCIAL START    //
-* & ICONS              //
-* & Links styling     //
+/* ////////////////////////////
+* NOTE: SOCIAL START & FAQ   //
+* & ICONS                  //
+* & Links styling        //
  *********************/
 .social {
   background-color: #f7f7f7;
@@ -72,6 +72,18 @@ i {color: #323232;}
   color: #e6ae49;
   text-decoration: none;
   transition: all 0.25s;
+}
+
+#faq-text {
+  /* border: 1px solid gray; */
+  color: #555;
+}
+
+.card-header:hover {
+  cursor: pointer;
+}
+
+.card {
 }
 
 /* //////////////////////
