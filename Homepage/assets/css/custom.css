@@ -107,7 +107,8 @@ highlight {
 .u-go-to-v2 { background-color: white !important; }
 .u-go-to-v2:hover { background-color: #e6ae49 !important; }
 
-
+::selection { background: #e6ae49; /* WebKit/Blink Browsers */}
+::-moz-selection { background: #e6ae49; /* Gecko Browsers */}
 
 /* ///////////////////////////
 * NOTE: ANIMATIONS START   //
