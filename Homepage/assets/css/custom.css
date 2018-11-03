@@ -83,7 +83,17 @@ i {color: #323232;}
   cursor: pointer;
 }
 
-.card {
+.reason-block-cont {
+  display: flex;
+  margin: 20px;
+}
+
+#reason-img {
+  width: 71px;
+  height: 71px;
+  margin-right: 43px;
+  text-align: center;
+  display: inline-block;
 }
 
 /* //////////////////////
@@ -102,6 +112,7 @@ highlight {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
+  text-shadow: 2px 2px #323232;
 }
 
 .u-go-to-v2 { background-color: white !important; }
