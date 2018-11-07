@@ -131,6 +131,10 @@ highlight {
 /* ///////////////////////////
 * NOTE: ANIMATIONS START   //
  **************************/
+#grow, #grow-click { transition: all .2s ease-in-out; }
+#grow:hover { transform: scale(1.1); cursor: default;}
+#grow-click:hover { transform: scale(1.1);}
+
 #img-float {
 	transform: translatey(10px);
 	animation: float 5s ease-in-out infinite !important;
