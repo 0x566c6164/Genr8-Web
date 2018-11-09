@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Homepage.vue";
-import Factory from "./views/Factory-Home.vue";
-import Create from "./views/Factory-Create.vue";
+import Main from "./views/Main.vue";
+import Home from "./views/Home.vue";
+import Apps from "./views/Apps.vue";
+import ICOs from "./views/ICOs.vue";
+import Token from "./views/Token.vue";
 
 Vue.use(Router);
 
@@ -13,18 +15,56 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "main",
+      component: Main,
+      children: [
+        {
+          path: "/",
+          name: "home",
+          component: Home
+        },
+        {
+          path: "/apps/",
+          name: "apps",
+          component: Apps
+        },
+        {
+          path: "/icos/",
+          name: "icos",
+          component: ICOs
+        }
+      ]
     },
     {
-      path: "/factory/",
-      name: "factory",
-      component: Factory
+      path: "/ico/:id",
+      name: "icos",
+      component: ICOs
     },
     {
-      path: "/factory/create",
-      name: "create",
-      component: Create
+      path: "/token/:id",
+      name: "token",
+      component: Token
     }
   ]
 });
+
+// const router = new VueRouter({
+//   routes: [
+//     { path: '/user/:id', component: User,
+//       children: [
+//         {
+//           // UserProfile will be rendered inside User's <router-view>
+//           // when /user/:id/profile is matched
+//           path: 'profile',
+//           component: UserProfile
+//         },
+//         {
+//           // UserPosts will be rendered inside User's <router-view>
+//           // when /user/:id/posts is matched
+//           path: 'posts',
+//           component: UserPosts
+//         }
+//       ]
+//     }
+//   ]
+// })

@@ -1,77 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/factory">Home</router-link> |
-      <router-link to="/factory/create">Generate App</router-link>
-    </div>
-    <router-view/>
+    <!-- <div id="nav">
+      <img src="./assets/GenFactory.png"/>
+      <router-link to="/home/"><span class="nav-text" id="home">Home</span></router-link>
+      <router-link v-on:click.native="loadApps()" to="/apps/"><span class="nav-text" id="apps">Apps</span></router-link>
+      <router-link to="/icos/"><span class="nav-text" id="icos">ICO's</span></router-link>
+      <router-link to="/games/"><span class="nav-text" id="games">Games</span></router-link>
+      <router-link to="/wiki/"><span class="nav-text-2" id="wiki">Wiki</span></router-link>
+      <router-link to="/api/"><span class="nav-text-2" id="api">API</span></router-link>
+    </div> -->
+    <router-view></router-view>
+      <!-- All HTML + CSS from /components/ goes into #Wrapper div -->
+        <!-- <footer>
+        <p id="footer-text-1"> © Genr8 2018. All Rights Reserved </p>
+        <p id="footer-text-2"> Discord | Smart Contracts </p>
+      </footer> -->
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    loadApps() {
-     setTimeout(displayContracts, 100)
-    }
+   //  loadApps() {
+   //   setTimeout(displayContracts, 100)
+   // }
   }
 };
 </script>
 
 <style lang="scss">
-body {
-  background-color: #efeae1;
-}
-h1,h2,h3, p {
-  color: black;
-}
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  background-color: #584b4f;
-  a {
-    font-weight: bold;
-    // color: #2c3e50;
-    color: #efeae1;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 
-#apps-grid {
-  list-style: outside none none;
-  padding: 30px 15px 60px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(375px, 375px));
-  grid-gap: 50px;
-  padding-left: 125px;
-  padding-right: 125px;
 
-  // Contract is a <li> elemnt
-  #contract {
-    color: red;
-    border: 2px solid #ccc;
-    min-height: 125px;
-    padding: 25px 30px 25px;
-    text-align: left;
-    width: 375px;
 
-    a {
-    }
-  }
-
-  #contract:hover {
-    transform: scale(1.02);
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-}
 </style>
