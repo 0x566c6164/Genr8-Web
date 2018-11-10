@@ -25,7 +25,7 @@
 
     <div class="container-fluid">
         <div class="row">
-          <nav class="col-0 sidebar" style="width: 80px; margin-top: 75px;">
+          <nav class="sidebar" style="width: 80px; margin-top: 75px;">
             <div class="sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
@@ -38,16 +38,20 @@
 
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-center" style="font-size: 14px;">
-                    <i class="fa fa-home fa-3x"></i>
-                    Create
-                  </a>
+                  <router-link to="/create/">
+                    <a class="nav-link text-center" style="font-size: 14px;">
+                      <i class="fa fa-home fa-3x"></i>
+                      <span>Create</span>
+                    </a>
+                  </router-link>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-center" style="font-size: 14px;">
-                    <i class="fa fa-home fa-3x"></i>
-                    Manage
-                  </a>
+                  <router-link to="/manage/">
+                    <a class="nav-link text-center" style="font-size: 14px;">
+                      <i class="fa fa-home fa-3x"></i>
+                      <span>Manage</span>
+                    </a>
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -55,7 +59,7 @@
 
           <main role="main" class="col-11">
             <!-- class="px-4 py-4" -->
-            <router-view class="py-5"></router-view>
+            <router-view></router-view>
           </main>
         </div>
       </div>
@@ -97,8 +101,13 @@ $color-gray: #a69ca1;
 $color-yellow: #e6ae49;
 $color-orange: #f89631;
 $color-purple: #2f283a;
+$color-purple2: #27212f;
 $color-border: #342e3c;
 $color-darkpurple: #1c1822;
+
+* {
+  color: $color-light;
+}
 
 body {
   ::selection { background: $color-yellow;}
@@ -107,20 +116,26 @@ body {
   a {color: $color-light;}
   a:hover {
     color: $color-yellow;
+    text-decoration: none;
     transition: all 0.25s;
     transform: scale(1.1);
     cursor: pointer;
+    i, span {color: $color-yellow;}
   }
   button {
     background-color: $color-orange;
     color: $color-darkpurple !important;
     font-weight: 700 !important;
+    &:hover {
+      transition: all 0.25s;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+    &:focus {
+      outline-style:none;
+      box-shadow:none;
+    }
    }
-  button:hover {
-    transition: all 0.25s;
-    transform: scale(1.1);
-    cursor: pointer;
-  }
 }
 
 .navbar {
@@ -135,6 +150,10 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
+}
+main {
+  margin-top: 85px;
+  margin-left: 85px;
 }
 
 
