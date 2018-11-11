@@ -6,14 +6,14 @@
           <form>
             <div class="row">
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Contract Name <highlight>*</highlight></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Contract Name">
-                <small id="emailHelp" class="form-text text-muted">Contract name, words and numbers will do, example: Proof of Revenue.</small>
+                <label for="contract-name">Contract Name <highlight>*</highlight></label>
+                <input type="text" class="form-control" id="contract-name" aria-describedby="contract-help" placeholder="Contract Name">
+                <small id="contract-help" class="form-text text-muted">Contract name, words and numbers will do, example: Proof of Revenue.</small>
               </div>
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Time Cap <highlight>*</highlight></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Block Height">
-                <small id="emailHelp" class="form-text text-muted">The block number past which the ICO can launch.</small>
+                <label for="time-cap">Time Cap <highlight>*</highlight></label>
+                <input type="number" class="form-control" id="time-cap" aria-describedby="time-cap-help" placeholder="Block Height">
+                <small id="time-cap-help" class="form-text text-muted">The block number past which the ICO can launch.</small>
               </div>
             </div>
 
@@ -21,14 +21,14 @@
 
             <div class="row">
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Token Symbol <highlight>*</highlight></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Token Symbol">
-                <small id="emailHelp" class="form-text text-muted">Token symbol, example: PR.</small>
+                <label for="token-symbol">Token Symbol <highlight>*</highlight></label>
+                <input type="text" class="form-control" id="token-symbol" aria-describedby="token-symbol-help" placeholder="Token Symbol">
+                <small id="token-symbol-help" class="form-text text-muted">Token symbol, example: PR.</small>
               </div>
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Soft Cap <highlight>*</highlight></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Minimum">
-                <small id="emailHelp" class="form-text text-muted">The minimum investment cap for the ICO to launch, uses counter currency. <br>
+                <label for="soft-cap">Soft Cap <highlight>*</highlight></label>
+                <input type="number" class="form-control" id="soft-cap" aria-describedby="soft-cap-help" placeholder="Minimum">
+                <small id="soft-cap-help" class="form-text text-muted">The minimum investment cap for the ICO to launch, uses counter currency. <br>
                    For example: if you're using ETH as counter currency, type in 10 for the cap to be a minimum of 10 Ethereum.</small>
               </div>
             </div>
@@ -36,23 +36,23 @@
             <br>
             <div class="row">
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Counter Currency</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Current Counter Currency: ETH">
-                <small id="emailHelp" class="form-text text-muted">The currency that the contract will accept, in exchange for tokens. <br> leave empty if you want it to accept ETH, or enter a token address you wish to accept.</small>
+                <label for="counter-currency">Counter Currency</label>
+                <input type="text" class="form-control" id="counter-currency" aria-describedby="counter-help" placeholder="Current Counter Currency: ETH">
+                <small id="counter-help" class="form-text text-muted">The currency that the contract will accept, in exchange for tokens. <br> leave empty if you want it to accept ETH, or enter a token address you wish to accept.</small>
               </div>
               <div class="col-6 form-group base">
-                <label for="exampleInputEmail1">Hard Cap <highlight>*</highlight></label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Maximum">
-                <small id="emailHelp" class="form-text text-muted">The maximum amount of Counter Currency that the contract will accept. <br>
+                <label for="hard-cap">Hard Cap <highlight>*</highlight></label>
+                <input type="number" class="form-control" id="hard-cap" aria-describedby="hard-cap-help" placeholder="Maximum">
+                <small id="hard-cap-help" class="form-text text-muted">The maximum amount of Counter Currency that the contract will accept. <br>
                    For example: if you're using ETH as counter currency, type in 10 for the cap to be a maximum of 10 Ethereum.</small>
               </div>
             </div>
 
             <br>
             <div class="form-group base">
-              <label for="exampleInputEmail1">Decimals <highlight>*</highlight></label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="8">
-              <small id="emailHelp" class="form-text text-muted">Decimal number, example: 8 for Bitcoin or 18 for Ethereum.</small>
+              <label for="decimals">Decimals <highlight>*</highlight></label>
+              <input type="number" class="form-control" id="decimals" aria-describedby="number-help" placeholder="8">
+              <small id="number-help" class="form-text text-muted">Decimal number, example: 8 for Bitcoin or 18 for Ethereum.</small>
             </div>
             <br>
           </form>

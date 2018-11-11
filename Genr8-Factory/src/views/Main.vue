@@ -31,7 +31,7 @@
                 <li class="nav-item">
                   <router-link to="/">
                     <a class="nav-link text-center" style="font-size: 14px;">
-                      <i class="fa fa-home fa-3x"></i>
+                      <i class="fa fa-home fa-2x"></i>
                       <span>Home</span>
                     </a>
                   </router-link>
@@ -40,7 +40,7 @@
                 <li class="nav-item">
                   <router-link to="/create/">
                     <a class="nav-link text-center" style="font-size: 14px;">
-                      <i class="fa fa-home fa-3x"></i>
+                    <i class="fa fa-plus fa-2x"></i>
                       <span>Create</span>
                     </a>
                   </router-link>
@@ -48,7 +48,7 @@
                 <li class="nav-item">
                   <router-link to="/manage/">
                     <a class="nav-link text-center" style="font-size: 14px;">
-                      <i class="fa fa-home fa-3x"></i>
+                      <i class="fa fa-cogs fa-2x"></i>
                       <span>Manage</span>
                     </a>
                   </router-link>

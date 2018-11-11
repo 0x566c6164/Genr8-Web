@@ -75,7 +75,7 @@ $color-purple2: #27212f;
 $color-border: #342e3c;
 $color-darkpurple: #1c1822;
 
-$card-width:  350px;
+$card-width:  400px;
 $card-height: 450px;
 
   .header {
@@ -96,7 +96,7 @@ $card-height: 450px;
     margin-top: 25px;
 
     &.spring-fever{
-      background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1765/bg-blog-card.jpg) no-repeat;
+      background: url(https://hodlfund.io/erc-20-ethereum-standard.png) no-repeat;
     }
 
     .color-overlay{
@@ -131,7 +131,7 @@ $card-height: 450px;
         bottom: 120px;
       }
       .color-overlay{
-        background: rgba(84,104,110,0.8);
+        background: rgba(39,33,47,0.8);
       }
     }
   }
@@ -194,19 +194,6 @@ $card-height: 450px;
     z-index: 20;
     opacity: 0;
     transition: bottom .3s, opacity .3s cubic-bezier(.33,.66,.66,1);
-  }
-
-  .utility-info{
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    z-index: 20;
-  }
-  .utility-list{
-    list-style-type: none;
-    margin: 0 0 30px 20px;
-    padding: 0;
-    width: 100%;
   }
 
 //
