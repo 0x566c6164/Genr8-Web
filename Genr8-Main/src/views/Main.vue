@@ -1,144 +1,72 @@
 <template>
-  <div id="dashboard">
-    <!-- Header -->
-    <header id="js-header" class="u-header u-header--sticky-top">
-      <div class="u-header__section u-header__section--admin-dark g-min-height-65">
-        <nav class="navbar no-gutters g-pa-0">
-          <div class="col-auto d-flex flex-nowrap u-header-logo-toggler g-py-12">
-            <!-- Logo -->
-            <a href="#" class="navbar-brand d-flex align-self-center g-hidden-xs-down g-line-height-1 py-0 g-mt-5">
-              <img class="u-header-logo" src="../../public/assets/img/n_copy.png" alt="" style="width: 132px; height: 104px;">
-            </a>
-            <!-- End Logo -->
-
-            <!-- Sidebar Toggler -->
-            <a id="toggler" class="js-side-nav u-header__nav-toggler d-flex align-self-center ml-auto" href="#" data-hssm-class="u-side-nav--mini u-sidebar-navigation-v1--mini" data-hssm-body-class="u-side-nav-mini" data-hssm-is-close-all-except-this="true" data-hssm-target="#sideNav">
-              <i class="hs-admin-align-left"></i>
-            </a>
-            <!-- End Sidebar Toggler -->
-          </div>
-          </nav>
-        </div>
-    </header>
-    <!-- End Header -->
-
-
-    <main class="container-fluid px-0 g-pt-65">
-      <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
-        <!-- Sidebar Nav -->
-        <div id="sideNav" class="col-auto u-sidebar-navigation-v1 u-sidebar-navigation--dark">
-          <ul id="sideNavMenu" class="u-sidebar-navigation-v1-menu u-side-nav--top-level-menu g-min-height-100vh mb-0">
-            <!-- Dashboards -->
-            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-                <router-link to="/" id="Home" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#subMenu1">
-                  <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18 ">
-                  <i class="hs-admin-server"></i>
-                  </span>
-                  <span class="media-body align-self-center">Home</span>
-                  <span class="d-flex align-self-center u-side-nav--control-icon"></span>
-                  <span class="u-side-nav--has-sub-menu__indicator"></span>
-              </router-link>
-
-            </li>
-            <!-- End Home -->
-
-            <!-- App Views -->
-            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-              <router-link to="/apps/" id="Apps" class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" data-hssm-target="#subMenu4">
-                <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
-                <i class="hs-admin-layers"></i>
-                </span>
-                <span class="media-body align-self-center">Apps</span>
-                <span class="d-flex align-self-center u-side-nav--control-icon"></span>
-                <span class="u-side-nav--has-sub-menu__indicator"></span>
-              </router-link>
-            </li>
-            <!-- End Apps -->
-
-            <!-- Tables -->
-            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-              <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="#!" data-hssm-target="#subMenu8">
-                <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
-                <i class="hs-admin-layout-grid-3"></i>
-                </span>
-                <span class="media-body align-self-center">ICO Explorer</span>
-                <span class="d-flex align-self-center u-side-nav--control-icon">
-                <i class="hs-admin-angle-right"></i>
-                </span>
-                <span class="u-side-nav--has-sub-menu__indicator"></span>
-              </a>
-
-              <!-- Tables: Submenu-1 -->
-              <ul id="subMenu8" class="u-sidebar-navigation-v1-menu u-side-nav--second-level-menu mb-0">
-                <!-- Basic Tables -->
-                <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
-                  <a class="media u-side-nav--second-level-menu-link g-px-15 g-py-12" href="tables/tables-basic.html">
-                    <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
-                    <i class="hs-admin-layout-list-thumb"></i>
-                    </span>
-                    <span class="media-body align-self-center">Live ICO's</span>
-                  </a>
+  <div id="main">
+    <nav class="navbar navbar-expand fixed-top" style="height: 75px;">
+        <a href="#" class="navbar-brand">My Website</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+              <li>
+                <h1>Welcome, user</h1>
+              </li>
+                <li class="navbar-item">
+                    <a href="#" class="nav-link">Documentation</a>
                 </li>
-                <!-- End Basic Tables -->
+                <li class="navbar-item">
+                    <a href="#" class="nav-link">Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="nav-link">About Me</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-                <!-- Table Designs -->
-                <li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
-                  <a class="media u-side-nav--second-level-menu-link g-px-15 g-py-12" href="tables/tables-complex.html">
-                    <span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
-                    <i class="hs-admin-layout-media-overlay-alt-2"></i>
-                    </span>
-                    <span class="media-body align-self-center">Ready to Launch</span>
-                  </a>
+    <div class="container-fluid">
+        <div class="row">
+          <nav class="sidebar" style="width: 80px; margin-top: 75px;">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <router-link to="/">
+                    <a class="nav-link text-center" style="font-size: 14px;">
+                      <i class="fa fa-home fa-2x"></i>
+                      <span>Home</span>
+                    </a>
+                  </router-link>
+
+                </li>
+                <li class="nav-item">
+                  <router-link to="/create/">
+                    <a class="nav-link text-center" style="font-size: 14px;">
+                    <i class="fa fa-plus fa-2x"></i>
+                      <span>Create</span>
+                    </a>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/manage/">
+                    <a class="nav-link text-center" style="font-size: 14px;">
+                      <i class="fa fa-cogs fa-2x"></i>
+                      <span>Manage</span>
+                    </a>
+                  </router-link>
                 </li>
               </ul>
-              <!-- End Tables: Submenu-1 -->
-            </li>
-            <!-- End Tables -->
-
-            <!-- Casino -->
-            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
-              <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="#!" data-hssm-target="#subMenu6">
-                <span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
-                <i class="hs-admin-layout-media-center-alt"></i>
-                </span>
-                <span class="media-body align-self-center">Casino</span>
-                <span class="d-flex align-self-center u-side-nav--control-icon">
-              </span>
-                <span class="u-side-nav--has-sub-menu__indicator"></span>
-              </a>
-
-            <!-- Packages -->
-            <li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
-              <a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="packages.html">
-                <span class="d-flex align-self-center g-font-size-18 g-mr-18">
-                <i class="hs-admin-medall"></i>
-                </span>
-                <span class="media-body align-self-center">Traders Lounge</span>
-              </a>
-            </li>
-            <!-- End Packages -->
-          </ul>
-        </div>
-        <!-- End Sidebar Nav -->
-
-        <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
-          <!-- Router View -->
-          <div id="router-view" class="g-pa-20">
-            <router-view></router-view>
-          </div>
-          <!-- Footer -->
-          <footer id="footer" class="u-footer--bottom-sticky g-color-white g-pa-20">
-            <div class="row align-items-center">
-              <div class="col-lg-12 text-center">
-                <small class="g-font-size-default">&copy; 2018 DexStreet.io All Rights Reserved.</small>
-              </div>
             </div>
-          </footer>
-          <!-- End Footer -->
+          </nav>
+
+          <main role="main" class="col-11">
+            <!-- class="px-4 py-4" -->
+            <router-view></router-view>
+          </main>
         </div>
       </div>
-    </main>
   </div>
+
+
+
 </template>
 
 <script>
@@ -165,10 +93,67 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+// #f89631
 
-footer {
-  background-color: #222e44;
+$color-light: #ededee;
+$color-gray: #a69ca1;
+$color-yellow: #e6ae49;
+$color-orange: #f89631;
+$color-purple: #2f283a;
+$color-purple2: #27212f;
+$color-border: #342e3c;
+$color-darkpurple: #1c1822;
+
+* {
+  color: $color-light;
+}
+
+body {
+  ::selection { background: $color-yellow;}
+  ::-moz-selection { background: $color-yellow;}
+  background-color: $color-darkpurple;
+  a {color: $color-light;}
+  a:hover {
+    color: $color-yellow;
+    text-decoration: none;
+    transition: all 0.25s;
+    transform: scale(1.1);
+    cursor: pointer;
+    i, span {color: $color-yellow;}
+  }
+  button {
+    background-color: $color-orange;
+    color: $color-darkpurple !important;
+    font-weight: 700 !important;
+    &:hover {
+      transition: all 0.25s;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+    &:focus {
+      outline-style:none;
+      box-shadow:none;
+    }
+   }
+}
+
+.navbar {
+  background-color: $color-purple;
+  border: 1px solid $color-border;
+}
+.sidebar {
+  background-color: $color-purple;
+  border-right: 1px solid $color-border;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+main {
+  margin-top: 85px;
+  margin-left: 85px;
 }
 
 

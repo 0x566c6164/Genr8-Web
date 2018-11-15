@@ -2,9 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 import Main from "./views/Main.vue";
 import Home from "./views/Home.vue";
-import Apps from "./views/Apps.vue";
-import ICOs from "./views/ICOs.vue";
-import Token from "./views/Token.vue";
+import Create from "./views/Create.vue";
+import Erc from "./views/ERC.vue";
+import Ico from "./views/ICO.vue";
+
 
 Vue.use(Router);
 
@@ -24,26 +25,21 @@ export default new Router({
           component: Home
         },
         {
-          path: "/apps/",
-          name: "apps",
-          component: Apps
+          path: "/create/",
+          name: "create",
+          component: Create
         },
         {
-          path: "/icos/",
-          name: "icos",
-          component: ICOs
+          path: "erc",
+          name: "erc",
+          component: Erc
+        },
+        {
+          path: "ico",
+          name: "ico",
+          component: Ico
         }
       ]
-    },
-    {
-      path: "/ico/:id",
-      name: "icos",
-      component: ICOs
-    },
-    {
-      path: "/token/:id",
-      name: "token",
-      component: Token
     }
   ]
 });
