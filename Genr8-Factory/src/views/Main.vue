@@ -144,7 +144,7 @@ body {
 }
 .sidebar {
   background-color: $color-purple;
-  border: 1px solid $color-border;
+  border-right: 1px solid $color-border;
   height: 100%;
   position: fixed;
   z-index: 1;
