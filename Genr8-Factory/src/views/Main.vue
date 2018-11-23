@@ -110,8 +110,8 @@ $color-darkpurple: #1c1822;
 }
 
 body {
-  ::selection { background: $color-yellow;}
-  ::-moz-selection { background: $color-yellow;}
+  ::selection { background: $color-gray;}
+  ::-moz-selection { background: $color-gray;}
   background-color: $color-darkpurple;
   a {color: $color-light;}
   a:hover {

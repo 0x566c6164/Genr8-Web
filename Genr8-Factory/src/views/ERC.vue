@@ -3,39 +3,47 @@
     <div class="col-6 card text-left ">
       <h4 class="card-header">ERC-20 Creation Form</h4>
       <div class="card-body">
-        <form>
+        <form @submit.prevent="submit" autocomplete="off">
           <div class="form-group">
-            <label for="contract-name">Contract Name <highlight>*</highlight></label>
-            <input type="text" class="form-control" id="contract-name" aria-describedby="contract-help" placeholder="Contract Name">
+            <label for="contract-name">Contract Name <highlight>* </highlight></label>
+            <input v-model="form.name" type="text" class="form-control" id="contract-name" aria-describedby="contract-help" placeholder="Contract Name">
             <small id="contract-help" class="form-text text-muted">Contract name, words and numbers will do, example: Proof of Revenue.</small>
+            <small v-if="!$v.form.name.maxLength" class="error-message">Maximum of 20 characters </small>
           </div>
           <br>
           <div class="form-group">
             <label for="token-symbol">Token Symbol <highlight>*</highlight></label>
-            <input type="text" class="form-control" id="token-symbol" aria-describedby="token-symbol-help" placeholder="Token Symbol">
+            <input v-model="form.symbol" type="text" class="form-control" id="token-symbol" aria-describedby="token-symbol-help" placeholder="Token Symbol">
             <small id="token-symbol-help" class="form-text text-muted">Token symbol, example: PR.</small>
+            <small v-if="!$v.form.symbol.maxLength" class="error-message">Maximum of 5 characters </small>
+            <small v-if="!$v.form.symbol.alphaNum" class="error-message">Enter only [a-z / A-Z] and [0-9]</small>
           </div>
           <br>
           <div class="form-group">
             <label for="counter-currency">Counter Currency</label>
-            <input type="text" class="form-control" id="counter-currency" aria-describedby="counter-help" placeholder="Current Counter Currency: ETH">
+            <input v-model="form.counter" type="text" class="form-control" id="counter-currency" aria-describedby="counter-help" placeholder="Type 0x0 for ETH">
             <small id="counter-help" class="form-text text-muted">The currency that the contract will accept, in exchange for tokens. <br> leave empty if you want it to accept ETH, or enter a token address you wish to accept.</small>
+            <small v-if="!$v.form.counter.alphaNum" class="error-message">Enter only [a-z / A-Z] and [0-9]</small>
+          </div>
+          <div class="form-group base">
+            <label for="decimals">Decimals <highlight>*</highlight></label>
+            <input v-model="form.decimals" type="number" class="form-control" id="decimals" aria-describedby="number-help" placeholder="8">
+            <small id="number-help" class="form-text text-muted">Decimal number, example: 8 for Bitcoin or 18 for Ethereum.</small>
+            <small v-if="!$v.form.decimals.between" class="error-message">Valid number range 2-18 </small>
           </div>
           <br>
-          <div class="form-group">
-            <label for="hard-cap">Hard Cap <highlight>*</highlight></label>
-            <input type="number" class="form-control" id="hard-cap" aria-describedby="hard-cap-help" placeholder="Maximum">
-            <small id="hard-cap-help" class="form-text text-muted">The maximum amount of Counter Currency that the contract will accept. <br>
-               For example: if you're using ETH as counter currency, type in 10 for the cap to be a maximum of 10 Ethereum.</small>
+          <highlight>*</highlight><small class="text-muted">Required</small>
+          <hr>
+          <div class="text-center">
+          <button :disabled="submitStatus === 'PENDING'" class="btn" type="submit" name="button">Sumbit</button>
+            <br>
+            <br>
+            <p class="success-message" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
+            <p class="error-message" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+            <p class="pending-message" v-if="submitStatus === 'PENDING'">Generating...</p>
+            <br>
           </div>
-          <br>
         </form>
-        <highlight>*</highlight><small class="text-muted">Required</small>
-        <hr>
-        <div class="text-center">
-        <button class="btn" type="button" name="button">Generate</button>
-          <p class="py-2"><small class="text-muted">Good luck, Wolf of DexStreet.</small></p>
-        </div>
       </div>
     </div>
   </div>
@@ -43,10 +51,65 @@
 
 <script>
 // @ is an alias to /src
+import { required, minLength, maxLength, between, alphaNum, numeric } from 'vuelidate/lib/validators'
 
 export default {
-  name: "ERC"
+
+  name: "ERC",
+
+  data() {
+    return {
+      form: {
+        name: '',
+        symbol: '',
+        counter: '0x0',
+        decimals: 8,
+      },
+      submitStatus: null
+    }
+  },
+  validations: {
+    form: {
+      name: {
+        required,
+        maxLength: maxLength(20)
+     },
+     symbol: {
+       required,
+       alphaNum,
+       maxLength: maxLength(5)
+     },
+     counter: {
+       alphaNum,
+       maxLength: maxLength(42)
+     },
+     decimals: {
+       required,
+       numeric,
+       between: between(2, 18)
+     }
+    }
+ },
+ methods: {
+   submit() {
+      console.log('submit!')
+      this.$v.form.$touch()
+      if (this.$v.form.$invalid) {
+        this.submitStatus = 'ERROR'
+      } else {
+        // do your submit logic here
+        console.log('Opening metamask transaction...')
+        this.submitStatus = 'PENDING'
+        setTimeout(() => {
+          this.submitStatus = 'OK'
+        }, 500)
+      }
+    }
+ }
+
+
 };
+
 </script>
 
 <style scoped lang="scss">
@@ -87,8 +150,10 @@ background-color: $color-purple2;
   }
 }
 
-highlight {
-  color: $color-yellow;
-}
+highlight {color: $color-yellow;}
+
+.success-message {color: $color-yellow;}
+.error-message {color: red;}
+.pending-message {color: $color-gray;}
 
 </style>
