@@ -78,7 +78,7 @@ async function detectWeb3 () {
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
-        web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/Fi6gFcfwLWXX6YUOnke8'))
+        web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/177258995fc749f0ad924bcab33f8b2f'))
         web3Mode = 'direct'
     }
     // Non-dapp browsers...

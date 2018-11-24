@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="counter-currency">Counter Currency</label>
             <input v-model="form.counter" type="text" class="form-control" id="counter-currency" aria-describedby="counter-help" placeholder="Type 0x0 for ETH">
-            <small id="counter-help" class="form-text text-muted">The currency that the contract will accept, in exchange for tokens. <br> leave empty if you want it to accept ETH, or enter a token address you wish to accept.</small>
+            <small id="counter-help" class="form-text text-muted">The currency that the contract will accept, in exchange for tokens. <br> leave as 0x0 if you want it to accept ETH, or enter a token address you wish to accept.</small>
             <small v-if="!$v.form.counter.alphaNum" class="error-message">Enter only [a-z / A-Z] and [0-9]</small>
           </div>
           <div class="form-group base">
@@ -40,6 +40,7 @@
             <br>
             <p class="success-message" v-if="submitStatus === 'OK'">Thanks for your submission!</p>
             <p class="error-message" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+            <p class="error-message" v-if="submitStatus === 'CONTRACT-ERROR'">There was a problem with the Web3 provider.</p>
             <p class="pending-message" v-if="submitStatus === 'PENDING'">Generating...</p>
             <br>
           </div>
@@ -50,7 +51,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import { required, minLength, maxLength, between, alphaNum, numeric } from 'vuelidate/lib/validators'
 
 export default {
@@ -64,6 +64,7 @@ export default {
         symbol: '',
         counter: '0x0',
         decimals: 8,
+        precision: 1000000 // not sure whats that for now
       },
       submitStatus: null
     }
@@ -100,16 +101,22 @@ export default {
         // do your submit logic here
         console.log('Opening metamask transaction...')
         this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
+        // web3 logic... sending transaction
+        basicContract.genr8(web3.toHex(this.form.name), web3.toHex(this.form.symbol), this.form.decimals, (this.form.counter == '0x0') ? '0x0000000000000000000000000000000000000000' : this.form.counter, this.form.precision , function(e,r) {
+          if(e) {
+            // failed
+            this.submitStatus = 'CONTRACT-ERROR'
+            console.log('error ' + e);
+          } else {
+            // success
+            this.submitStatus = 'OK'
+            console.log('success ' + r);
+          }
+        });
       }
     }
- }
-
-
+  }
 };
-
 </script>
 
 <style scoped lang="scss">
