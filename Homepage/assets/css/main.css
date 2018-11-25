@@ -1,4 +1,17 @@
 /* Add here all your css styles (customizations) */
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway:500');
+
+p {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px !important;
+  cursor: default;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
+  cursor: default;
+}
 
 /* /////////////////////
 * NOTE: HEADER START  //
@@ -55,24 +68,23 @@
 * & Links styling        //
  *********************/
 .faq {
-  background-color: #f7f7f7;
+  background-color: #1c1133;
+  color: #ededee;
+}
+
+.card {
+  color: #ededee;
+  background-color: #2f283a;
+  border: none;
+}
+
+.card-header {
+  font-weight: 800;
+  background-color: #2f283a;
+  border: none;
 }
 
 i {color: #323232;}
-
-.link {
-  color: #323232;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  margin-top: -15px;
-}
-
-.link:hover {
-  color: #e6ae49;
-  text-decoration: none;
-  transition: all 0.25s;
-}
 
 #faq-text {
   /* border: 1px solid gray; */
@@ -100,7 +112,8 @@ i {color: #323232;}
 * NOTE: FOOTER START   //
  **********************/
 footer {
-  background-color: #1B1B1F;
+  background-color: #131133;
+  border-top: 2px solid orange;
 }
 
 #footer-hover:hover  {
@@ -109,6 +122,7 @@ footer {
 
 .fab, .fa {
   margin: 5px;
+  color: #cccccc;
 }
 .fab:hover, .fa:hover {
   color: #e6ae49;
@@ -119,7 +133,7 @@ highlight {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
-  text-shadow: 2px 2px #323232;
+  text-shadow: 1px 1px #443f54;
 }
 
 .u-go-to-v2 { background-color: white !important; }
