@@ -37,6 +37,76 @@
 <body>
   <main>
 
+    <header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section g-bg-black-opacity-0_5 g-py-0" data-header-fix-moment="300">
+      <div class="u-header__section u-header__section--dark g-transition-0_3 g-py-10" data-header-fix-moment-exclude="g-py-10" data-header-fix-moment-classes="g-bg-black-opacity-0_5 g-py-0">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-3 g-right-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+              <span class="hamburger hamburger--slider">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+              </span>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+
+            <!-- Logo -->
+            <a href="#" class="navbar-brand">
+              <highlight style="text-shadow: 2px 2px #323232;">Dexstreet.io</highlight>
+              <!-- <img src="assets/img/GenFactory.png" alt="Image Description" style="width: 128px; height: 104px;"> -->
+            </a>
+            <!-- End Logo -->
+
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+              <ul class="navbar-nav text-uppercase g-font-weight-600 ml-auto">
+                <li class="nav-item g-mx-20--lg active">
+                  <a href="index.html" class="nav-link px-0">Home
+
+              </a>
+                </li>
+                <li class="nav-item g-mx-20--lg active">
+                  <a href="#!" class="nav-link px-0">Features
+
+              </a>
+                </li>
+                <li class="nav-item g-mx-20--lg active">
+                  <a href="#!" class="nav-link px-0">Exchange
+              </a>
+                </li>
+                <li class="nav-item g-mx-20--lg active">
+                  <a href="login.html" class="nav-link px-0">Factory
+
+              </a>
+                </li>
+                <li class="nav-item dropdown active g-mx-20--lg">
+                  <a href="#!" class="nav-link dropdown-toggle g-px-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Community </a>
+                  <!-- Submenu (Bootstrap) -->
+                  <ul class="dropdown-menu rounded-0 g-text-transform-none g-bg-black-opacity-0_5 g-brd-none g-brd-top g-brd-orange g-brd-top-2 g-mt-20 g-mt-10--lg--scrolling">
+                    <li class="dropdown-item">
+                      <a class="nav-link g-px-0" href="#!">Twitter</a>
+                    </li>
+                    <li class="dropdown-item">
+                      <a class="nav-link g-px-0" href="#!">Discord</a>
+                    </li>
+                    <li class="dropdown-item">
+                      <a class="nav-link g-px-0" href="#!">Wechat</a>
+                    </li>
+                    <li class="dropdown-item">
+                      <a class="nav-link g-px-0" href="#!">Telegram</a>
+                    </li>
+                  </ul>
+                  <!-- End Submenu (Bootstrap) -->
+                </li>
+              </ul>
+            </div>
+            <!-- End Navigation -->
+          </div>
+        </nav>
+      </div>
+    </header>
+
     <!-- Login -->
     <section class="clearfix">
       <div class="row no-gutters align-items-center">
@@ -167,7 +237,7 @@
 
     <!-- Copyright Footer -->
     <!-- End Copyright Footer -->
-    <a class="js-go-to u-go-to-v1" href="#!" data-type="fixed" data-position='{
+    <a class="js-go-to u-go-to-v2" style="background-color: orange;" href="#!" data-type="fixed" data-position='{
      "bottom": 15,
      "right": 15
    }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">

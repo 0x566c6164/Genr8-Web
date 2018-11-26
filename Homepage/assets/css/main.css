@@ -41,6 +41,7 @@ h1,h2,h3,h4,h5,h6 {
   color: #e6ae49 !important;
   transition: all 0.25s !important;
   cursor: pointer;
+  border-bottom: 1px solid orange;
 }
 
 .tp-bullet {

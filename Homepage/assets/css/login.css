@@ -1,4 +1,53 @@
 /* Add here all your css styles (customizations) */
+
+
+#header {
+  position: absolute;
+  width: 100%;
+  display: block;
+}
+
+#header-img {
+  width: 50px;
+  margin: 25px;
+}
+
+.nav-link {
+  margin: 2px;
+  font-size: 12px;
+  font-weight: 500 !important;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  float: right;
+}
+
+.nav-link:hover {
+  color: #e6ae49 !important;
+  transition: all 0.25s !important;
+  cursor: pointer;
+  border-bottom: 1px solid orange;
+}
+
+.tp-bullet {
+  border-radius: 25px;
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+}
+
+.first-header {
+  text-shadow: 2px 2px #323232;
+}
+
+.first-text {
+  text-shadow: 5px 5px #323232;
+}
+
+.icon-block {
+  border-top: 1px solid gray;
+}
+
+
 /* ////////////////////////////
 * NOTE:                      //
 * & ICONS                  //
@@ -22,28 +71,35 @@ i {color: #323232;}
 /* //////////////////////
 * NOTE: FOOTER START   //
  **********************/
-footer {
-  background-color: #1B1B1F;
-}
+ footer {
+   background-color: #131133;
+   border-top: 2px solid orange;
+ }
 
-#footer-hover:hover  {
-  color: #e6ae49;
-}
+ #footer-hover:hover  {
+   color: #e6ae49;
+ }
 
-.fab, .fa {
-  margin: 5px;
-}
-.fab:hover, .fa:hover {
-  color: #e6ae49;
-}
+ .fab, .fa {
+   margin: 5px;
+   color: #cccccc;
+ }
+ .fab:hover, .fa:hover {
+   color: #e6ae49;
+ }
 
-highlight {
-  color: #e6ae49;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  text-shadow: 2px 2px #323232;
-}
+ highlight {
+   color: #e6ae49;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+   font-weight: 600;
+   text-shadow: 1px 1px #443f54;
+ }
+
+ .js-go-to:hover {
+   background-color: #e6ae49;
+   transition: all 0.25s;
+ }
 
 ::selection { background: #e6ae49; /* WebKit/Blink Browsers */}
 ::-moz-selection { background: #e6ae49; /* Gecko Browsers */}
