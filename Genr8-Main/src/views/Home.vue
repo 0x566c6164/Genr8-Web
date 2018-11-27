@@ -1,79 +1,47 @@
 <template lang="html">
-  <div id="wrapper">
-    <div class="row">
-      <div id="factory-101" class="col-5 card text-left">
-        <h4 class="card-header">Factory 101</h4>
-        <div class="card-body">
-          <h5 class="card-title">What can it do</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <br>
-            <p><i>Tell me more!</i></p>
-            <br>
-          <h5 class="card-title">Who is it for</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-             ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-             in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-             sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <br>
-            <p><i>Okay, what else?</i></p>
-            <br>
-          <h5 class="card-title">How to launch a successful contract</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-               ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-               in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-               sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <br>
-          <hr>
-          <div class="text-center">
-          <button class="btn" type="button" name="button">Manual</button>
-            <p class="py-2"><small class="text-muted">Still hungry for knowledge? Check out our Manual</small></p>
-          </div>
-        </div>
-      </div>
-      <div id="factory-102" class="col-5 card text-left">
-        <h4 class="card-header">Factory 102</h4>
-        <div class="card-body">
-          <h5 class="card-title">Why do we even need to register?</h5>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div>
 
-
-          <div class="card-group py-5">
-            <div class="card">
-              <img class="card-img-top" src="" alt="Tokens created">
-              <div class="card-body">
-                <h5 class="card-title">18</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="" alt="Revenue generated">
-              <div class="card-body">
-                <h5 class="card-title">$500,000</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              </div>
-            </div>
-            <div class="card">
-              <img class="card-img-top" src="" alt="Something inetersting">
-              <div class="card-body">
-                <h5 class="card-title">???</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              </div>
-            </div>
-          </div>
-  </div>
+  <v-container fluid>
+    <v-layout align-center justify-center column fill-height>
+      <v-carousel
+        delimiter-icon="o" prev-icon="mdi-arrow-left" next-icon="mdi-arrow-right">
+        <v-carousel-item v-for="(item,i) in items":key="i":src="item.src"></v-carousel-item>
+      </v-carousel>
+      <v-layout row wrap>
+        <v-flex v-for="i in 3" :key="`4${i}`" xs4>
+        <v-card style="width: 100%;" dark color="primary">
+          <v-card-text class="px-0">4</v-card-text>
+        </v-card>
+      </v-flex>
+      </v-layout>
+    </v-layout>
+    <v-layout align-center justify-center column fill-height>
+      List of shares
+    </v-layout>
+  </v-container>
 
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "home",
+  data () {
+     return {
+       items: [
+         {
+           src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+         },
+         {
+           src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+         },
+         {
+           src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+         },
+         {
+           src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+         }
+       ]
+     }
+   }
 }
 </script>
 
