@@ -1,19 +1,22 @@
 <template>
   <v-app>
-    <v-toolbar>
+    <v-toolbar flat height="85" class="toolbar">
       <img style="width: 50px;" src="../assets/logo.png" alt="">
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn flat>Home</v-btn>
-      <v-btn flat>Discover</v-btn>
-      <v-btn flat>Announcement</v-btn>
-      <v-btn flat>Settings</v-btn>
-      <v-spacer></v-spacer>
-      <v-btn flat>Connect to MetaMask</v-btn>
+      <div class="container">
+        <div class="row">
+          <div class="col "><a class="toolbar-button font-weight-light subheading">Home</a></div>
+          <div class="col "><a class="toolbar-button font-weight-light subheading">Discover</a></div>
+          <div class="col "><a class="toolbar-button font-weight-light subheading">Announcements</a></div>
+          <div class="col settings"><a class="toolbar-button font-weight-light text-no-wrap subheading">Settings</a></div>
+          <div class="col metamask"><a class="toolbar-button font-weight-light text-no-wrap subheading">Connect to MetaMask</a></div>
+        </div>
+      </div>
     </v-toolbar-items>
   </v-toolbar>
-    <v-content>
-      <v-container fluid>
+    <v-content >
+      <v-container fluid style="padding: 0px;">
         <router-view></router-view>
       </v-container>
     </v-content>
@@ -47,9 +50,29 @@ $color-purple2: #27212f;
 $color-border: #342e3c;
 $color-darkpurple: #1c1822;
 
-v-toolbar {
-  padding-right: 250px !important;
+.toolbar {
+  background-color: #fafafa !important;
+
+  .toolbar-button {
+    padding-left: 25px;
+    padding-right: 25px;
+    &:hover {
+      color: $color-yellow !important;
+      padding-bottom: 5px;
+      border-bottom: 3px solid $color-yellow;
+      transition: all 0.25s;
+    }
+  }
+  .settings {
+    padding-right: 25px;
+  }
+  .metamask {
+    padding-left: 25px;
+    border-left: 1px solid $color-gray;
+  }
 }
+
+
 
 // * {
 //   color: $color-light;

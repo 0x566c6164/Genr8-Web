@@ -30,6 +30,15 @@ export default {
 
 <style lang="scss">
 
+#app {background-color: #fafafa;}
+@media only screen and (min-width: 1200px) {
+  #app {
+    padding-left: 125px;
+    padding-right: 125px;
+  }
+}
+
+
 
 
 </style>
