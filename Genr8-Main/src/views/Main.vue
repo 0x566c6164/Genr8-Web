@@ -1,16 +1,18 @@
 <template>
   <v-app>
     <v-toolbar flat height="85" class="toolbar">
-      <img style="width: 50px;" src="../assets/logo.png" alt="">
+      <img style="width: 50px;" src="../assets/eth.jpg" alt="">
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <div class="container">
         <div class="row">
-          <div class="col "><a class="toolbar-button font-weight-light subheading">Home</a></div>
-          <div class="col "><a class="toolbar-button font-weight-light subheading">Discover</a></div>
-          <div class="col "><a class="toolbar-button font-weight-light subheading">Announcements</a></div>
+          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Home</a></div>
+          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Discover</a></div>
+          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Announcements</a></div>
           <div class="col settings"><a class="toolbar-button font-weight-light text-no-wrap subheading">Settings</a></div>
-          <div class="col metamask"><a class="toolbar-button font-weight-light text-no-wrap subheading">Connect to MetaMask</a></div>
+          <div class="col metamask"><a class="toolbar-button font-weight-light text-no-wrap body-2">Connect to MetaMask</a>
+            <img src="../assets/metamask.png" style="width: 30px; padding-left: 5px;"/>
+          </div>
         </div>
       </div>
     </v-toolbar-items>
@@ -53,22 +55,37 @@ $color-darkpurple: #1c1822;
 .toolbar {
   background-color: #fafafa !important;
 
-  .toolbar-button {
+.toolbar-navigator, .toolbar-button {
+  padding-top: 25px;
+}
+
+  .toolbar-navigator {
     padding-left: 25px;
     padding-right: 25px;
     &:hover {
       color: $color-yellow !important;
       padding-bottom: 5px;
-      border-bottom: 3px solid $color-yellow;
+      padding-top: 5px;
+      border-bottom: 1px solid $color-yellow;
+      border-top: 1px solid $color-yellow;
       transition: all 0.25s;
     }
   }
   .settings {
+    padding-left: 25px;
     padding-right: 25px;
+    &:hover {
+      color: $color-yellow !important;
+      transition: all 0.25s;
+    }
   }
   .metamask {
     padding-left: 25px;
     border-left: 1px solid $color-gray;
+    &:hover {
+      color: $color-yellow !important;
+      transition: all 0.25s;
+    }
   }
 }
 

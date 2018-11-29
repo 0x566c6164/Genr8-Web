@@ -7,9 +7,9 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="1" class="indicator"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2" class="indicator"></li>
         </ol>
-        <div class="carousel-inner" style="height: 350px;">
+        <div class="carousel-inner" style="height: 300px;">
           <div class="carousel-item active">
-            <img class="d-block w-100" style="width: 100%; height: 350px;" src="https://cdn.vuetifyjs.com/images/carousel/planet.jpg" alt="First slide">
+            <img class="d-block w-100" style="width: 100%; height: 300px;" src="https://cdn.vuetifyjs.com/images/carousel/planet.jpg" alt="First slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100" src="https://cdn.vuetifyjs.com/images/carousel/planet.jpg" alt="Second slide">
@@ -28,37 +28,43 @@
         </a>
       </div>
 
-      <v-layout row wrap>
-        <v-flex v-for="i in 3" :key="`4${i}`" xs4>
-        <v-card style="width: 100%;" dark color="primary">
-          <v-card-text class="px-0">4</v-card-text>
-        </v-card>
-      </v-flex>
-      </v-layout>
+      <div class="container announcer">
+        <div class="row">
+          <div class="col-12 text-center">
+            Announcement text (switching every few sec & clickable)
+          </div>
+        </div>
+      </div>
 
-      <br>
+      <h1>Fund Index</h1>
 
       <v-card class="table">
-        <v-card-title>
+        <v-card-title class="table-header">
           <div class="container">
             <div class="row">
-              <div class="col-2"><v-btn flat >Favorites</v-btn></div>
-              <div class="col-2"><v-btn flat >ETH</v-btn></div>
-              <div class="col-2"><v-btn flat >Other</v-btn></div>
-              <div class="col-6"><v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field></div>
+              <div class="col-2">
+                <span class="text-muted align-center justify-center row fill-height counter">Counter Currency</span>
+              </div>
+              <div class="col-1 active-btn">
+                  <a class=" button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">ETH</a>
+              </div>
+              <div class="col-1 active-btn">
+                  <a class=" button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">Show All</a>
+              </div>
+              <div class="col-4"></div>
+              <div class="col-4"><v-text-field class="search-bar" v-model="search" prepend-inner-icon="mdi-magnify" label="Search" single-line hide-details solo flat ></v-text-field></div>
             </div>
           </div>
-          <v-spacer></v-spacer>
 
         </v-card-title>
     <v-data-table  :headers="headers" :items="desserts" :search="search">
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.calories }}</td>
-        <td class="text-xs-right">{{ props.item.fat }}</td>
-        <td class="text-xs-right">{{ props.item.carbs }}</td>
-        <td class="text-xs-right">{{ props.item.protein }}</td>
-        <td class="text-xs-right">{{ props.item.iron }}</td>
+        <td  class="text-xs-left">{{ props.item.calories }}</td>
+        <td class="text-xs-left">{{ props.item.fat }}</td>
+        <td class="text-xs-left">{{ props.item.carbs }}</td>
+        <td class="text-xs-left">{{ props.item.protein }}</td>
+        <td class="text-xs-left">{{ props.item.iron }}</td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
@@ -76,108 +82,103 @@ export default {
       return {
         search: '',
         headers: [
-          {
-            text: 'Contract',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          },
+          { text: 'Contract', value: 'name'},
           { text: 'Symbol', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'Price', value: 'fat' },
+          { text: 'Supply', value: 'carbs' },
+          { text: 'Decimals', value: 'protein' },
+          { text: 'Counter', value: 'iron' }
         ],
         desserts: [
           {
             value: false,
             name: 'Frozen Yogurt',
             calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Ice cream sandwich',
             calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Eclair',
             calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
+            fat: 1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Cupcake',
             calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Gingerbread',
             calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
+            fat: 1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Jelly bean',
             calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Lollipop',
             calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Honeycomb',
             calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
+            fat:1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'Donut',
             calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
+            fat: 1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           },
           {
             value: false,
             name: 'KitKat',
             calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
+            fat: 1,
+            carbs: 100000,
+            protein: 8,
+            iron: 'ETH'
           }
         ]
       }
@@ -189,7 +190,7 @@ export default {
 
 $color-light: #ededee;
 $color-gray: #d9d9d9;
-$color-yellow: #f89631;
+$color-yellow: #e6ae49;
 $color-orange: #df5527;
 $color-purple: #2f283a;
 $color-purple2: #27212f;
@@ -203,7 +204,7 @@ $color-darkpurple: #1c1822;
   }
   .active {
     transform: all 1.5s;
-    width: 45px;
+    width: 40px;
     height: 5px;
     background-color: $color-gray;
   }
@@ -213,6 +214,39 @@ $color-darkpurple: #1c1822;
   border: 1px solid $color-gray;
   border-radius: 5px;
   box-shadow: none;
+
+  .table-header {
+    padding: 0px;
+    margin: 0px;
+    height: 50px;
+    .container {
+      padding: 5px;
+      margin: 0px;
+    }
+  }
+}
+
+.counter {
+  border-right: 1px solid $color-light;
+}
+.search-bar {
+  border-left: 1px solid $color-light;
+  padding: 0px;
+}
+
+.button {
+    &:hover {
+      color: $color-yellow !important;
+      transform: scale(1.05);
+      transition: all 0.25s;
+    }
+}
+
+.announcer {
+  background-color: $color-light;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  height: 50px;
 }
 
 </style>
