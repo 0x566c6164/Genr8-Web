@@ -5,10 +5,10 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <div class="container">
-        <div class="row">
-          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Home</a></div>
-          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Discover</a></div>
-          <div class="col "><a class="toolbar-navigator font-weight-light subheading">Announcements</a></div>
+        <div class="row" style="padding-top: 15px;">
+          <div class="col "><a v-on:click="selectedMenu = 'home'" :class="{selected: selectedMenu === 'home' }" class="toolbar-navigator font-weight-light subheading">Home</a></div>
+          <div class="col "><a v-on:click="selectedMenu = 'discover'" :class="{selected: selectedMenu === 'discover' }" class="toolbar-navigator font-weight-light subheading">Discover</a></div>
+          <div class="col "><a  v-on:click="selectedMenu = 'announcements'" :class="{selected: selectedMenu === 'announcements' }" class="toolbar-navigator font-weight-light subheading">Announcements</a></div>
           <div class="col settings"><a class="toolbar-button font-weight-light text-no-wrap subheading">Settings</a></div>
           <div class="col metamask"><a class="toolbar-button font-weight-light text-no-wrap body-2">Connect to MetaMask</a>
             <img src="../assets/metamask.png" style="width: 30px; padding-left: 5px;"/>
@@ -30,11 +30,15 @@
 
 export default {
   name: "Homepage",
+  data () {
+    return {
+      selectedMenu: 'home'
+    }
+  },
   methods: {
-    toggleOff: function(){
-            $()
-          // some code to filter users
-        }
+    select: function() {
+      //
+    }
   }
 };
 
@@ -46,7 +50,7 @@ export default {
 $color-light: #ededee;
 $color-gray: #a69ca1;
 $color-yellow: #e6ae49;
-$color-orange: #f89631;
+$color-orange: #df5527;
 $color-purple: #2f283a;
 $color-purple2: #27212f;
 $color-border: #342e3c;
@@ -63,19 +67,30 @@ $color-darkpurple: #1c1822;
     padding-left: 25px;
     padding-right: 25px;
     &:hover {
-      color: $color-yellow !important;
+      color: $color-orange !important;
       padding-bottom: 5px;
       padding-top: 5px;
-      border-bottom: 1px solid $color-yellow;
-      border-top: 1px solid $color-yellow;
+      border-bottom: 1px solid $color-orange;
+      border-top: 1px solid $color-orange;
       transition: all 0.25s;
     }
   }
+  .selected {
+    color: $color-orange !important;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid $color-orange;
+    border-top: 1px solid $color-orange;
+    transition: all 0.25s;
+    font-weight: 500 !important;
+    border-radius: 2px;
+  }
+
   .settings {
     padding-left: 25px;
     padding-right: 25px;
     &:hover {
-      color: $color-yellow !important;
+      color: $color-orange !important;
       transition: all 0.25s;
     }
   }
@@ -83,7 +98,7 @@ $color-darkpurple: #1c1822;
     padding-left: 25px;
     border-left: 1px solid $color-gray;
     &:hover {
-      color: $color-yellow !important;
+      color: $color-orange !important;
       transition: all 0.25s;
     }
   }
@@ -96,17 +111,17 @@ $color-darkpurple: #1c1822;
 // }
 //
 // body {
-//   ::selection { background: $color-yellow;}
-//   ::-moz-selection { background: $color-yellow;}
+//   ::selection { background: $color-orange:;}
+//   ::-moz-selection { background: $color-orange:;}
 //   background-color: $color-darkpurple;
 //   a {color: $color-light;}
 //   a:hover {
-//     color: $color-yellow;
+//     color: $color-orange:;
 //     text-decoration: none;
 //     transition: all 0.25s;
 //     transform: scale(1.1);
 //     cursor: pointer;
-//     i, span {color: $color-yellow;}
+//     i, span {color: $color-orange:;}
 //   }
 //   button {
 //     background-color: $color-orange;

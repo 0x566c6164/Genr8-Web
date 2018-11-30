@@ -46,10 +46,12 @@
                 <span class="text-muted align-center justify-center row fill-height counter">Counter Currency</span>
               </div>
               <div class="col-1 active-btn">
-                  <a class=" button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">ETH</a>
+                  <a v-on:click="selectedCategory = 'eth'" :class="{selected: selectedCategory === 'eth' }"
+                  class="button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">ETH</a>
               </div>
               <div class="col-1 active-btn">
-                  <a class=" button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">Show All</a>
+                  <a v-on:click="selectedCategory = 'all'" :class="{selected: selectedCategory === 'all' }"
+                  class="button align-center justify-center row fill-height font-weight-regular subheading text-no-wrap">Show All</a>
               </div>
               <div class="col-4"></div>
               <div class="col-4"><v-text-field class="search-bar" v-model="search" prepend-inner-icon="mdi-magnify" label="Search" single-line hide-details solo flat ></v-text-field></div>
@@ -58,14 +60,22 @@
 
         </v-card-title>
     <v-data-table  :headers="headers" :items="desserts" :search="search">
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td  class="text-xs-left">{{ props.item.calories }}</td>
-        <td class="text-xs-left">{{ props.item.fat }}</td>
-        <td class="text-xs-left">{{ props.item.carbs }}</td>
-        <td class="text-xs-left">{{ props.item.protein }}</td>
-        <td class="text-xs-left">{{ props.item.iron }}</td>
-      </template>
+        <template slot="items" slot-scope="props" v-if="selectedCategory === 'eth' && props.item.counter === 'ETH'">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-left">{{ props.item.symbol }}</td>
+            <td class="text-xs-left">{{ props.item.price }}</td>
+            <td class="text-xs-left">{{ props.item.supply }}</td>
+            <td class="text-xs-left">{{ props.item.decimals }}</td>
+            <td class="text-xs-left">{{ props.item.counter }}</td>
+        </template>
+        <template slot="items" slot-scope="props" v-if="selectedCategory === 'all'">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-left">{{ props.item.symbol }}</td>
+            <td class="text-xs-left">{{ props.item.price }}</td>
+            <td class="text-xs-left">{{ props.item.supply }}</td>
+            <td class="text-xs-left">{{ props.item.decimals }}</td>
+            <td class="text-xs-left">{{ props.item.counter }}</td>
+        </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
       </v-alert>
@@ -80,105 +90,106 @@ export default {
   name: "home",
   data () {
       return {
+        selectedCategory: 'all',
         search: '',
         headers: [
           { text: 'Contract', value: 'name'},
-          { text: 'Symbol', value: 'calories' },
-          { text: 'Price', value: 'fat' },
-          { text: 'Supply', value: 'carbs' },
-          { text: 'Decimals', value: 'protein' },
-          { text: 'Counter', value: 'iron' }
+          { text: 'Symbol', value: 'symbol' },
+          { text: 'Price', value: 'price' },
+          { text: 'Supply', value: 'supply' },
+          { text: 'Decimals', value: 'decimals' },
+          { text: 'Counter', value: 'counter' }
         ],
         desserts: [
           {
             value: false,
             name: 'Frozen Yogurt',
-            calories: 159,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 159,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: '0x123445'
           },
           {
             value: false,
             name: 'Ice cream sandwich',
-            calories: 237,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 237,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: '0x54321'
           },
           {
             value: false,
             name: 'Eclair',
-            calories: 262,
-            fat: 1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 262,
+            price: 1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Cupcake',
-            calories: 305,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 305,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Gingerbread',
-            calories: 356,
-            fat: 1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 356,
+            price: 1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Jelly bean',
-            calories: 375,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 375,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Lollipop',
-            calories: 392,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 392,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Honeycomb',
-            calories: 408,
-            fat:1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 408,
+            price:1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'Donut',
-            calories: 452,
-            fat: 1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 452,
+            price: 1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           },
           {
             value: false,
             name: 'KitKat',
-            calories: 518,
-            fat: 1,
-            carbs: 100000,
-            protein: 8,
-            iron: 'ETH'
+            symbol: 518,
+            price: 1,
+            supply: 100000,
+            decimals: 8,
+            counter: 'ETH'
           }
         ]
       }
@@ -226,6 +237,13 @@ $color-darkpurple: #1c1822;
   }
 }
 
+.selected {
+  color: $color-orange !important;
+  border-bottom: 1px solid $color-orange;
+  font-weight: 500 !important;
+  border-radius: 4px;
+}
+
 .counter {
   border-right: 1px solid $color-light;
 }
@@ -236,7 +254,7 @@ $color-darkpurple: #1c1822;
 
 .button {
     &:hover {
-      color: $color-yellow !important;
+      color: $color-orange !important;
       transform: scale(1.05);
       transition: all 0.25s;
     }
