@@ -2,9 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Main from "./views/Main.vue";
 import Home from "./views/Home.vue";
-import Create from "./views/Create.vue";
-import Erc from "./views/ERC.vue";
-import Ico from "./views/ICO.vue";
+import Discover from "./views/Discover.vue";
+import Announcements from "./views/Announcements.vue";
 
 
 Vue.use(Router);
@@ -25,42 +24,16 @@ export default new Router({
           component: Home
         },
         {
-          path: "/create/",
-          name: "create",
-          component: Create
+          path: "/discover/",
+          name: "discover",
+          component: Discover
         },
         {
-          path: "erc",
-          name: "erc",
-          component: Erc
-        },
-        {
-          path: "ico",
-          name: "ico",
-          component: Ico
+          path: "/announcements/",
+          name: "announcements",
+          component: Announcements
         }
       ]
     }
   ]
 });
-
-// const router = new VueRouter({
-//   routes: [
-//     { path: '/user/:id', component: User,
-//       children: [
-//         {
-//           // UserProfile will be rendered inside User's <router-view>
-//           // when /user/:id/profile is matched
-//           path: 'profile',
-//           component: UserProfile
-//         },
-//         {
-//           // UserPosts will be rendered inside User's <router-view>
-//           // when /user/:id/posts is matched
-//           path: 'posts',
-//           component: UserPosts
-//         }
-//       ]
-//     }
-//   ]
-// })

@@ -6,10 +6,28 @@
     <v-toolbar-items>
       <div class="container">
         <div class="row" style="padding-top: 15px;">
-          <div class="col "><a v-on:click="selectedMenu = 'home'" :class="{selected: selectedMenu === 'home' }" class="toolbar-navigator font-weight-light subheading">Home</a></div>
-          <div class="col "><a v-on:click="selectedMenu = 'discover'" :class="{selected: selectedMenu === 'discover' }" class="toolbar-navigator font-weight-light subheading">Discover</a></div>
-          <div class="col "><a  v-on:click="selectedMenu = 'announcements'" :class="{selected: selectedMenu === 'announcements' }" class="toolbar-navigator font-weight-light subheading">Announcements</a></div>
-          <div class="col settings"><a class="toolbar-button font-weight-light text-no-wrap subheading">Settings</a></div>
+          <div class="col ">
+            <router-link to="/">
+            <a v-on:click="selectedMenu = 'home'" :class="{selected: selectedMenu === 'home' }" class="toolbar-navigator font-weight-light subheading">Home</a>
+            </router-link>
+          </div>
+          <div class="col ">
+            <router-link to="/discover">
+            <a v-on:click="selectedMenu = 'discover'" :class="{selected: selectedMenu === 'discover' }" class="toolbar-navigator font-weight-light subheading">Discover</a>
+            </router-link>
+          </div>
+          <div class="col ">
+            <router-link to="/announcements">
+              <a v-on:click="selectedMenu = 'announcements'" :class="{selected: selectedMenu === 'announcements' }" class="toolbar-navigator font-weight-light subheading">Announcements</a>
+            </router-link>
+          </div>
+          <div class="col settings"><v-menu offset-y><a class="font-weight-light text-no-wrap subheading" slot="activator"> Settings </a>
+            <v-list>
+              <v-list-tile>Color Theme</v-list-tile>
+              <v-list-tile>Language</v-list-tile>
+            </v-list>
+          </v-menu>
+          </div>
           <div class="col metamask"><a class="toolbar-button font-weight-light text-no-wrap body-2">Connect to MetaMask</a>
             <img src="../assets/metamask.png" style="width: 30px; padding-left: 5px;"/>
           </div>
@@ -58,6 +76,12 @@ $color-darkpurple: #1c1822;
 
 .toolbar {
   background-color: #fafafa !important;
+
+  a {
+    text-decoration: none !important;
+    color: black;
+    font-weight: 300 !important;
+  }
 
 .toolbar-navigator, .toolbar-button {
   padding-top: 25px;

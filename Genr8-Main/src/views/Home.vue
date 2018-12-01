@@ -59,16 +59,21 @@
           </div>
 
         </v-card-title>
-    <v-data-table  :headers="headers" :items="desserts" :search="search">
-        <template slot="items" slot-scope="props" v-if="selectedCategory === 'eth' && props.item.counter === 'ETH'">
-            <td>{{ props.item.name }}</td>
+    <v-data-table  :headers="headers" :items="desserts" :search="search" v-if="selectedCategory === 'eth'" filter:"props.item.counter, ETH">
+        <template slot="items" slot-scope="props">
+            <td class="subheading">{{ props.item.name }}</td>
             <td class="text-xs-left">{{ props.item.symbol }}</td>
             <td class="text-xs-left">{{ props.item.price }}</td>
             <td class="text-xs-left">{{ props.item.supply }}</td>
             <td class="text-xs-left">{{ props.item.decimals }}</td>
             <td class="text-xs-left">{{ props.item.counter }}</td>
         </template>
-        <template slot="items" slot-scope="props" v-if="selectedCategory === 'all'">
+      <v-alert slot="no-results" :value="true" color="error" icon="warning">
+        Your search for "{{ search }}" found no results.
+      </v-alert>
+    </v-data-table>
+    <v-data-table  :headers="headers" :items="desserts" :search="search" v-if="selectedCategory === 'all'">
+        <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
             <td class="text-xs-left">{{ props.item.symbol }}</td>
             <td class="text-xs-left">{{ props.item.price }}</td>
@@ -126,7 +131,7 @@ export default {
             price: 1,
             supply: 100000,
             decimals: 8,
-            counter: 'ETH'
+            counter: '0x55555'
           },
           {
             value: false,
