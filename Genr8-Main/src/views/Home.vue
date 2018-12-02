@@ -59,27 +59,27 @@
           </div>
 
         </v-card-title>
-    <v-data-table  :headers="headers" :items="desserts" :search="search" v-if="selectedCategory === 'eth'" filter:"props.item.counter, ETH">
+    <v-data-table :headers="headers" :items="contracts" :search="search" v-if="selectedCategory === 'eth'">
         <template slot="items" slot-scope="props">
-            <td class="subheading">{{ props.item.name }}</td>
-            <td class="text-xs-left">{{ props.item.symbol }}</td>
-            <td class="text-xs-left">{{ props.item.price }}</td>
-            <td class="text-xs-left">{{ props.item.supply }}</td>
-            <td class="text-xs-left">{{ props.item.decimals }}</td>
-            <td class="text-xs-left">{{ props.item.counter }}</td>
+            <td class="contract">{{ props.item.name }}</td>
+            <td class="contract text-xs-left">{{ props.item.symbol }}</td>
+            <td class="contract text-xs-left">{{ props.item.price }}</td>
+            <td class="contract text-xs-left">{{ props.item.supply }}</td>
+            <td class="contract text-xs-left">{{ props.item.decimals }}</td>
+            <td class="contract text-xs-left">{{ props.item.counter }}</td>
         </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
       </v-alert>
     </v-data-table>
-    <v-data-table  :headers="headers" :items="desserts" :search="search" v-if="selectedCategory === 'all'">
+    <v-data-table  :headers="headers" :items="contracts" :search="search" v-if="selectedCategory === 'all'">
         <template slot="items" slot-scope="props">
-            <td>{{ props.item.name }}</td>
-            <td class="text-xs-left">{{ props.item.symbol }}</td>
-            <td class="text-xs-left">{{ props.item.price }}</td>
-            <td class="text-xs-left">{{ props.item.supply }}</td>
-            <td class="text-xs-left">{{ props.item.decimals }}</td>
-            <td class="text-xs-left">{{ props.item.counter }}</td>
+            <td class="contract">{{ props.item.name }}</td>
+            <td class="contract text-xs-left">{{ props.item.symbol }}</td>
+            <td class="contract text-xs-left">{{ props.item.price }}</td>
+            <td class="contract text-xs-left">{{ props.item.supply }}</td>
+            <td class="contract text-xs-left">{{ props.item.decimals }}</td>
+            <td class="contract text-xs-left">{{ props.item.counter }}</td>
         </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         Your search for "{{ search }}" found no results.
@@ -97,6 +97,7 @@ export default {
       return {
         selectedCategory: 'all',
         search: '',
+        eth: 'ETH',
         headers: [
           { text: 'Contract', value: 'name'},
           { text: 'Symbol', value: 'symbol' },
@@ -105,7 +106,7 @@ export default {
           { text: 'Decimals', value: 'decimals' },
           { text: 'Counter', value: 'counter' }
         ],
-        desserts: [
+        contracts: [
           {
             value: false,
             name: 'Frozen Yogurt',
@@ -198,6 +199,12 @@ export default {
           }
         ]
       }
+    },
+    methods: {
+      tableFilter() {
+        console.log(this.contracts);
+        return 'ETH';
+      }
     }
 }
 </script>
@@ -270,6 +277,13 @@ $color-darkpurple: #1c1822;
   margin-bottom: 25px;
   border-radius: 4px;
   height: 50px;
+}
+
+.contract {
+  cursor: pointer;
+  &:hover {
+    color: $color-orange;
+  }
 }
 
 </style>

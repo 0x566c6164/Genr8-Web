@@ -40,7 +40,22 @@
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer app></v-footer>
+    <v-divider></v-divider>
+    <v-footer height="auto" class="footer">
+    <v-card
+      class="flex footer-title" flat tile >
+      <v-card-title>
+        <strong class="subheading">Get connected with us on social networks!</strong>
+        <v-spacer></v-spacer>
+        <v-btn v-for="icon in icons" :key="icon" class="mx-3 icons" dark icon>
+          <v-icon size="24px">{{ icon }}</v-icon>
+        </v-btn>
+      </v-card-title>
+      <v-card-actions class="justify-center footer-end">
+        &copy;2018 — <strong> Dexstreet</strong>
+      </v-card-actions>
+    </v-card>
+  </v-footer>
   </v-app>
 </template>
 
@@ -50,7 +65,11 @@ export default {
   name: "Homepage",
   data () {
     return {
-      selectedMenu: 'home'
+      selectedMenu: 'home',
+      icons: [
+        'fab fa-discord',
+        'fab fa-twitter'
+      ]
     }
   },
   methods: {
@@ -128,58 +147,19 @@ $color-darkpurple: #1c1822;
   }
 }
 
+.footer {
+  .footer-title, .footer-end {
+    background-color: #fafafa;
+  }
+  .icons {
+    color: black !important;
+    &:hover {
+      color: $color-orange !important;
+      transition: all 0.1s !important;
+    }
+  }
+}
 
-
-// * {
-//   color: $color-light;
-// }
-//
-// body {
-//   ::selection { background: $color-orange:;}
-//   ::-moz-selection { background: $color-orange:;}
-//   background-color: $color-darkpurple;
-//   a {color: $color-light;}
-//   a:hover {
-//     color: $color-orange:;
-//     text-decoration: none;
-//     transition: all 0.25s;
-//     transform: scale(1.1);
-//     cursor: pointer;
-//     i, span {color: $color-orange:;}
-//   }
-//   button {
-//     background-color: $color-orange;
-//     color: $color-darkpurple !important;
-//     font-weight: 700 !important;
-//     &:hover {
-//       transition: all 0.25s;
-//       transform: scale(1.1);
-//       cursor: pointer;
-//     }
-//     &:focus {
-//       outline-style:none;
-//       box-shadow:none;
-//     }
-//    }
-// }
-//
-// .navbar {
-//   background-color: $color-purple;
-//   border: 1px solid $color-border;
-// }
-// .sidebar {
-//   background-color: $color-purple;
-//   border-right: 1px solid $color-border;
-//   height: 100%;
-//   position: fixed;
-//   z-index: 1;
-//   top: 0;
-//   left: 0;
-// }
-// main {
-//   margin-top: 85px;
-//   margin-left: 85px;
-// }
 
 
 </style>
